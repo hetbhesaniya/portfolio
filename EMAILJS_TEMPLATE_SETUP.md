@@ -145,3 +145,6 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=paste_your_public_key_here
 - Make sure `.env.local` is in the project root (same folder as `package.json`)
 - Restart your dev server after creating/changing `.env.local`
 
+
+
+

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -25,6 +25,16 @@ export default function Navigation() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
+    const isNavigatingRef = useRef(false);
+
+    const navItems = useMemo(() => [
+        { name: "Home", href: "#home", id: "home" },
+        { name: "About", href: "#about", id: "about" },
+        { name: "Experience", href: "#experience", id: "experience" },
+        { name: "Skills", href: "#skills", id: "skills" },
+        { name: "Projects", href: "#projects", id: "projects" },
+        { name: "Contact", href: "#contact", id: "contact" }
+    ], []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -34,19 +44,10 @@ export default function Navigation() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navItems = [
-        { name: "Home", href: "#home", id: "home" },
-        { name: "About", href: "#about", id: "about" },
-        { name: "Experience", href: "#experience", id: "experience" },
-        { name: "Skills", href: "#skills", id: "skills" },
-        { name: "Projects", href: "#projects", id: "projects" },
-        { name: "Contact", href: "#contact", id: "contact" }
-    ];
-
     const scrollToSection = (href) => {
         const element = document.querySelector(href);
         if (element) {
-            const navHeight = 80; // Approximate height of fixed navigation bar
+            const navHeight = 80;
             const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
             const offsetPosition = elementPosition - navHeight;
 
@@ -54,10 +55,9 @@ export default function Navigation() {
             setActiveSection(id);
             setIsMobileMenuOpen(false);
 
-            // Prevent scroll detection from overriding for longer
-            window.__navigationScrolling = true;
+            isNavigatingRef.current = true;
             setTimeout(() => {
-                window.__navigationScrolling = false;
+                isNavigatingRef.current = false;
             }, 1500);
 
             window.scrollTo({
@@ -65,10 +65,9 @@ export default function Navigation() {
                 behavior: 'smooth'
             });
 
-            // Ensure active section stays correct after scroll completes
             setTimeout(() => {
                 setActiveSection(id);
-            }, 800); // Wait for smooth scroll to complete
+            }, 800);
         }
     };
 
@@ -80,100 +79,89 @@ export default function Navigation() {
 
         if (!sections.length) return;
 
-        let isScrolling = false;
-        let scrollTimeout;
+        const updateActiveSection = () => {
+            if (isNavigatingRef.current) return;
 
-        const handleScroll = () => {
-            // Don't update active section if user just clicked a nav item (smooth scroll in progress)
-            if (isScrolling || window.__navigationScrolling) return;
+            const navHeight = 80;
+            const scrollPosition = window.scrollY + navHeight + 50;
 
-            // Find the section closest to the top of viewport
             let currentSection = 'home';
-            let minDistance = Infinity;
+            let maxVisibility = -Infinity;
 
             sections.forEach((section) => {
                 const rect = section.getBoundingClientRect();
-                // Check if section is in viewport with better threshold
-                if (rect.top <= 120 && rect.bottom >= 50) {
-                    const distance = Math.abs(rect.top - 80); // Account for nav height
-                    if (distance < minDistance) {
-                        minDistance = distance;
+                const sectionTop = rect.top + window.scrollY;
+                const sectionBottom = sectionTop + rect.height;
+
+                if (scrollPosition >= sectionTop && scrollPosition <= sectionBottom) {
+                    const visibility = Math.min(
+                        scrollPosition - sectionTop,
+                        sectionBottom - scrollPosition
+                    );
+                    if (visibility > maxVisibility) {
+                        maxVisibility = visibility;
                         currentSection = section.id;
                     }
                 }
             });
 
-            // Only update if we're at the top (home section)
-            if (window.scrollY < 100) {
+            if (window.scrollY < 150) {
                 currentSection = 'home';
             }
 
             setActiveSection(currentSection);
         };
 
-        // Track when smooth scroll starts
-        const handleSmoothScroll = () => {
-            isScrolling = true;
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                isScrolling = false;
-            }, 1000); // Wait for smooth scroll to complete
-        };
-
-        // Initial check with delay to ensure DOM is ready
-        setTimeout(() => {
-            if (window.scrollY < 100) {
-                setActiveSection('home');
-            } else {
-                handleScroll();
-            }
-        }, 100);
-
-        // Use IntersectionObserver for more accurate detection
         const observer = new IntersectionObserver(
             (entries) => {
-                // Don't update during programmatic scroll or manual navigation clicks
-                if (isScrolling || window.__navigationScrolling) return;
+                if (isNavigatingRef.current) return;
 
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const rect = entry.boundingClientRect;
-                        // Only update if section is in the upper portion of viewport
-                        if (rect.top <= 120 && rect.top >= -50) {
-                            setActiveSection(entry.target.id);
+                const visibleSections = entries
+                    .filter(entry => entry.isIntersecting)
+                    .map(entry => ({
+                        id: entry.target.id,
+                        intersectionRatio: entry.intersectionRatio,
+                        top: entry.boundingClientRect.top
+                    }))
+                    .sort((a, b) => {
+                        if (Math.abs(a.top) !== Math.abs(b.top)) {
+                            return Math.abs(a.top) - Math.abs(b.top);
                         }
-                    }
-                });
+                        return b.intersectionRatio - a.intersectionRatio;
+                    });
+
+                if (visibleSections.length > 0) {
+                    setActiveSection(visibleSections[0].id);
+                } else if (window.scrollY < 150) {
+                    setActiveSection('home');
+                }
             },
             {
                 root: null,
-                rootMargin: '-20% 0px -60% 0px',
-                threshold: [0.1, 0.25, 0.5]
+                rootMargin: '-80px 0px -50% 0px',
+                threshold: [0, 0.1, 0.25, 0.5, 0.75, 1]
             }
         );
 
         sections.forEach((section) => observer.observe(section));
 
-        // Add scroll listener with throttling
         let scrollTimer;
-        window.addEventListener('scroll', () => {
-            if (!isScrolling) {
-                clearTimeout(scrollTimer);
-                scrollTimer = setTimeout(handleScroll, 150);
-            }
-        }, { passive: true });
+        const handleScroll = () => {
+            if (isNavigatingRef.current) return;
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(updateActiveSection, 50);
+        };
 
-        // Listen for smooth scroll events
-        window.addEventListener('scroll', handleSmoothScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        updateActiveSection();
         
         return () => {
             clearTimeout(scrollTimer);
-            clearTimeout(scrollTimeout);
             window.removeEventListener('scroll', handleScroll);
-            window.removeEventListener('scroll', handleSmoothScroll);
             observer.disconnect();
         };
-    }, []);
+    }, [navItems]);
 
     return (
         <motion.nav

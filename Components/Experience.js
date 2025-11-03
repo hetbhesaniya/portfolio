@@ -13,8 +13,7 @@ export default function Experience() {
     fetch("/Data/Experience.json")
       .then(res => res.json())
       .then(data => setJobs(data))
-      .catch(err => {
-        console.error("Error loading experience data:", err);
+      .catch(() => {
         setJobs([]);
       });
   }, []);
@@ -116,7 +115,7 @@ export default function Experience() {
                           key={skillIndex}
                           className="px-2 py-1 text-xs"
                           style={{
-                            backgroundColor: index % 2 === 0 ? 'var(--accent-bg-soft)' : 'var(--accent-bg-soft)',
+                            backgroundColor: 'var(--accent-bg-soft)',
                             color: 'var(--accent-color)',
                             border: '1px solid var(--accent-border-soft)'
                           }}
@@ -225,7 +224,6 @@ export default function Experience() {
                 </h4>
                 <div className="space-y-3">
                   {selectedExperience.description.map((item, i) => {
-                    // Extract achievements that mention percentages or measurable impact
                     if (item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support')) {
                       return (
                         <div

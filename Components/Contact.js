@@ -23,19 +23,15 @@ export default function Contact() {
         setSubmitStatus(null);
         
         try {
-            // EmailJS configuration
             const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
             const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
             const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-            console.log('EmailJS Config:', { serviceId, templateId, publicKey: publicKey ? 'Set' : 'Missing' });
 
             if (!serviceId || !templateId || !publicKey) {
                 throw new Error('EmailJS configuration is missing. Please check your environment variables.');
             }
 
-            // Send email using EmailJS (no need to init separately in newer versions)
-            const result = await emailjs.send(
+            await emailjs.send(
                 serviceId,
                 templateId,
                 {
@@ -44,24 +40,18 @@ export default function Contact() {
                     message: formData.message,
                     to_name: 'Het Bhesaniya',
                 },
-                publicKey // Pass public key as 4th parameter
+                publicKey
             );
 
-            console.log('EmailJS Success:', result);
-
-            // Success
             setSubmitStatus('success');
             setFormData({ name: '', email: '', message: '' });
             
-            // Reset status message after 5 seconds
             setTimeout(() => {
                 setSubmitStatus(null);
             }, 5000);
-        } catch (error) {
-            console.error('EmailJS Error:', error);
+        } catch {
             setSubmitStatus('error');
             
-            // Reset status message after 5 seconds
             setTimeout(() => {
                 setSubmitStatus(null);
             }, 5000);
