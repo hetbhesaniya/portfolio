@@ -20,10 +20,8 @@ export default function Experience() {
 
   if (!jobs.length) {
     return (
-      <section id="experience" className="py-20 bg-white">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: 'var(--heading-accent)' }}>Experience</h2>
-          <div className="w-24 h-1 mx-auto mb-4" style={{ background: 'var(--underline-accent)' }}></div>
+      <section id="experience" className="py-16" style={{ background: 'var(--asu-ink)' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p style={{ color: 'var(--asu-text-muted)' }}>Loading experience...</p>
         </div>
       </section>

@@ -27,35 +27,71 @@ Your contact form is now integrated with **EmailJS** - a professional email serv
 5. **Copy the Service ID** (you'll need this)
 
 ### 3. Create Email Template
-1. Go to **Email Templates**
-2. Click **Create New Template**
-3. Use this template structure:
+
+#### Configure the Subject Line
+In the **Subject** field, change it to:
+```
+New Contact Form Message from {{from_name}}
+```
+Or keep it simple:
+```
+Portfolio Contact: {{from_name}}
+```
+
+#### Edit the Email Content
+1. Click the **"Edit Content"** button (or click in the content area)
+2. Clear the existing content
+3. Paste this template:
 
 ```
-Subject: New Contact Form Message from {{from_name}}
+New message received from your portfolio contact form!
 
-From: {{from_name}} ({{from_email}})
+From: {{from_name}}
+Email: {{from_email}}
 
 Message:
 {{message}}
 
 ---
-This message was sent from your portfolio contact form.
+This message was sent from your portfolio website.
 ```
 
-4. The template variables you can use:
-   - `{{from_name}}` - Sender's name
-   - `{{from_email}}` - Sender's email
-   - `{{message}}` - Message content
-   - `{{to_name}}` - Your name (Het Bhesaniya)
-5. **Copy the Template ID** (you'll need this)
+**Important:** Use these exact variable names (they match your code):
+- `{{from_name}}` - Sender's name
+- `{{from_email}}` - Sender's email  
+- `{{message}}` - The message content
 
-### 4. Get Public Key
-1. Go to **Account** → **General**
-2. Find your **Public Key**
-3. **Copy the Public Key** (you'll need this)
+#### Configure Email Settings (Right Panel)
 
-### 5. Configure Environment Variables
+**To Email ***
+- Set to your email address (e.g., `hetbhesaniya0096@gmail.com`)
+- This is where you'll receive messages
+
+**From Name**
+- Set to: `Portfolio Contact Form`
+- Or: `{{from_name}}` (will show sender's name)
+
+**From Email ***
+- Keep "Use Default Email Address" checked
+- This uses your EmailJS service email
+
+**Reply To ***
+- Set to: `{{from_email}}`
+- **This is important!** When you reply, it will go to the sender
+
+**Bcc & Cc**
+- Leave empty (unless you want copies sent elsewhere)
+
+#### Save and Test the Template
+1. Click the blue **"Save"** button (top right)
+2. Optional: Click **"Test It"** to test with sample data
+
+#### Get Your IDs
+1. **Template ID**: After saving, you'll see your template list. Click on your template and copy the **Template ID**
+2. **Service ID**: Go to **Email Services** in the left sidebar, click on your service, and copy the **Service ID**
+3. **Public Key**: Go to **Account** → **General**, and copy the **Public Key**
+
+### 4. Configure Environment Variables
 1. In your project root, create a file named `.env.local`
 2. Add the following with your values:
 
@@ -67,7 +103,7 @@ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key_here
 
 3. Replace the placeholder values with your actual IDs and keys from EmailJS
 
-### 6. Restart Development Server
+### 5. Restart Development Server
 After creating `.env.local`, restart your Next.js dev server:
 ```bash
 npm run dev
@@ -101,10 +137,22 @@ When talking about this feature:
 - "The form uses async/await for proper error handling and user feedback"
 - "I implemented loading states and success/error messages for better UX"
 
+## ❓ Troubleshooting
+
+**Template variables not working?**
+- Make sure variable names match exactly: `{{from_name}}`, `{{from_email}}`, `{{message}}`
+- No extra spaces in variable names
+
+**Not receiving emails?**
+- Check spam folder
+- Verify "To Email" is correct
+- Make sure you've added and verified your email service
+
+**Getting errors?**
+- Double-check all three values in `.env.local` are correct
+- Make sure `.env.local` is in the project root (same folder as `package.json`)
+- Restart your dev server after creating/changing `.env.local`
+
 ---
 
 **Need Help?** Check EmailJS docs: [https://www.emailjs.com/docs/](https://www.emailjs.com/docs/)
-
-
-
-
