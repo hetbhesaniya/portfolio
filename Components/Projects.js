@@ -30,23 +30,23 @@ export default function Projects() {
     <>
       <section id="projects" className="py-16" style={{ background: 'var(--asu-ink)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+        <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
-          >
+        >
             <h2 className="text-4xl md:text-5xl font-bold mb-4 asu-text-glow" style={{ color: 'var(--heading-accent)' }}>
-              Projects
-            </h2>
+            Projects
+          </h2>
             <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'var(--underline-accent)' }} />
-          </motion.div>
+        </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
@@ -58,16 +58,16 @@ export default function Projects() {
                   borderColor: 'var(--asu-border)',
                   border: '1px solid var(--asu-border)'
                 }}
-              >
-                {project.image_url && (
-                  <div className="relative overflow-hidden">
+            >
+              {project.image_url && (
+                <div className="relative overflow-hidden">
                     <Image
-                      src={project.image_url}
-                      alt={project.title}
+                    src={project.image_url}
+                    alt={project.title}
                       width={400}
                       height={200}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                   </div>
                 )}
                 <div className="p-5">
@@ -137,7 +137,7 @@ export default function Projects() {
                     style={{
                       background: 'linear-gradient(135deg, var(--asu-maroon) 0%, var(--asu-maroon-600) 100%)'
                     }}
-                  >
+                      >
                     <Code2 className="w-10 h-10 text-white" />
                   </div>
                 )}
@@ -214,9 +214,9 @@ export default function Projects() {
                     >
                       {tech}
                     </Badge>
-                  ))}
-                </div>
-              </div>
+          ))}
+        </div>
+      </div>
             </DialogContent>
           </>
         )}

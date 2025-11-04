@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "AWS Certified Cloud Practitioner",
+    "issuer": "Amazon Web Services",
+    "issue_date": "Jan 2024",
+    "credential_id": "AWS-CCP-2024",
+    "credential_url": "https://www.credly.com/badges/your-badge-id",
+    "description": "Foundational AWS cloud knowledge covering core AWS services, security, and architecture."
+  },
+  {
+    "id": 2,
+    "name": "Meta Front-End Developer Certificate",
+    "issuer": "Meta (Coursera)",
+    "issue_date": "Dec 2023",
+    "credential_id": "META-FE-2023",
+    "credential_url": "https://www.coursera.org/certificates/your-cert-id",
+    "description": "Front-end development using React, HTML/CSS, JavaScript, and UI/UX principles."
+  },
+  {
+    "id": 3,
+    "name": "Python for Data Science",
+    "issuer": "University of Michigan (Coursera)",
+    "issue_date": "Aug 2023",
+    "credential_id": "PYTHON-DS-2023",
+    "credential_url": "https://www.coursera.org/certificates/your-cert-id",
+    "description": "Data analysis, visualization, and machine learning with Python, Pandas, and NumPy."
+  }
+]
+

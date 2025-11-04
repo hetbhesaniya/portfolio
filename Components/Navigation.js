@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "@/Components/ThemeProvider";
+import { useRouter } from "next/router";
 
 // Pitchfork Icon Component - uses PNG images based on theme
 const PitchforkIcon = ({ size = 24, className = "" }) => {
@@ -21,11 +22,13 @@ const PitchforkIcon = ({ size = 24, className = "" }) => {
 };
 
 export default function Navigation() {
+    const router = useRouter();
     const { theme, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
     const isNavigatingRef = useRef(false);
+    const pitchforkPressTimer = useRef(null);
 
     const navItems = useMemo(() => [
         { name: "Home", href: "#home", id: "home" },
@@ -33,6 +36,7 @@ export default function Navigation() {
         { name: "Experience", href: "#experience", id: "experience" },
         { name: "Skills", href: "#skills", id: "skills" },
         { name: "Projects", href: "#projects", id: "projects" },
+        { name: "Certifications", href: "#certifications", id: "certifications" },
         { name: "Contact", href: "#contact", id: "contact" }
     ], []);
 
@@ -42,6 +46,36 @@ export default function Navigation() {
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
+    const handlePitchforkPressStart = () => {
+        pitchforkPressTimer.current = setTimeout(() => {
+            router.push('/AboutMe');
+        }, 1000);
+    };
+
+    const handlePitchforkPressEnd = () => {
+        // Check if timer was running (short press) before clearing it
+        const wasShortPress = pitchforkPressTimer.current !== null;
+        
+        // Clear the timer
+        if (pitchforkPressTimer.current) {
+            clearTimeout(pitchforkPressTimer.current);
+            pitchforkPressTimer.current = null;
+        }
+        
+        // If short press detected, toggle theme
+        if (wasShortPress) {
+            toggleTheme();
+        }
+    };
+
+    useEffect(() => {
+        return () => {
+            if (pitchforkPressTimer.current) {
+                clearTimeout(pitchforkPressTimer.current);
+            }
+        };
     }, []);
 
     const scrollToSection = (href) => {
@@ -204,10 +238,25 @@ export default function Navigation() {
                     {/* Right: Toggle Button + Mobile Menu */}
                     <div className="ml-auto flex items-center space-x-4">
                         <motion.button
+                            onMouseDown={handlePitchforkPressStart}
+                            onMouseUp={handlePitchforkPressEnd}
+                            onMouseLeave={handlePitchforkPressEnd}
+                            onTouchStart={handlePitchforkPressStart}
+                            onTouchEnd={handlePitchforkPressEnd}
                             whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={toggleTheme}
-                            aria-label="Toggle theme"
+                            aria-label="Theme toggle and story mode"
+                            animate={{
+                                boxShadow: [
+                                    "0 0 0px rgba(255,198,39,0)",
+                                    "0 0 20px rgba(255,198,39,0.3)",
+                                    "0 0 0px rgba(255,198,39,0)"
+                                ]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                repeatDelay: 28
+                            }}
                             className="p-3 rounded-md border"
                             style={{
                                 borderColor: theme === 'asu-dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',

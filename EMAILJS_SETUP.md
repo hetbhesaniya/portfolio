@@ -57,8 +57,8 @@ This message was sent from your portfolio website.
 ```
 
 **Important:** Use these exact variable names (they match your code):
-- `{{from_name}}` - Sender's name
-- `{{from_email}}` - Sender's email  
+   - `{{from_name}}` - Sender's name
+   - `{{from_email}}` - Sender's email
 - `{{message}}` - The message content
 
 #### Configure Email Settings (Right Panel)
