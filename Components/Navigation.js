@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "@/Components/ThemeProvider";
 import { useRouter } from "next/router";
+import { throttle, debounce } from "@/utils/scroll";
 
 // Pitchfork Icon Component - uses PNG images based on theme
 const PitchforkIcon = ({ size = 24, className = "" }) => {
@@ -41,10 +42,11 @@ export default function Navigation() {
     ], []);
 
     useEffect(() => {
-        const handleScroll = () => {
+        const handleScroll = throttle(() => {
             setIsScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
+        }, 100);
+        
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -179,19 +181,16 @@ export default function Navigation() {
 
         sections.forEach((section) => observer.observe(section));
 
-        let scrollTimer;
-        const handleScroll = () => {
+        const handleScroll = throttle(() => {
             if (isNavigatingRef.current) return;
-            clearTimeout(scrollTimer);
-            scrollTimer = setTimeout(updateActiveSection, 50);
-        };
+            updateActiveSection();
+        }, 100);
 
         window.addEventListener('scroll', handleScroll, { passive: true });
 
         updateActiveSection();
         
         return () => {
-            clearTimeout(scrollTimer);
             window.removeEventListener('scroll', handleScroll);
             observer.disconnect();
         };

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle } from "lucide-react";
+import SectionHeader from "@/Components/SectionHeader";
 
 export default function Skills() {
     const skillCategories = [
@@ -20,20 +21,10 @@ export default function Skills() {
     return (
         <section id="skills" className="py-20 bg-white">
             <div className="container mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 asu-text-glow" style={{ color: 'var(--heading-accent)' }}>
-                        Technical Skills
-                    </h2>
-                    <div className="w-24 h-1 mx-auto mb-8" style={{ background: 'var(--underline-accent)' }}></div>
-                    <p className="text-xl max-w-3xl mx-auto" style={{ color: '#444' }}>
-                        The technologies and tools I wield to execute my missions.
-                    </p>
-                </motion.div>
+                <SectionHeader 
+                    title="Technical Skills" 
+                    subtitle="The technologies and tools I wield to execute my missions." 
+                />
 
                 <div className="space-y-12">
                     {skillCategories.map((category, categoryIndex) => (

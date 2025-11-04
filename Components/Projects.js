@@ -1,22 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, Github, Eye, Code2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/Components/ui/dialog";
 import { Badge } from "@/Components/ui/badge";
+import { useDataFetch } from "@/hooks/useDataFetch";
+import SectionHeader from "@/Components/SectionHeader";
 
 export default function Projects() {
-  const [projects, setProjects] = useState([]);
+  const { data: projects, loading } = useDataFetch("/Data/projects.json");
   const [selectedProject, setSelectedProject] = useState(null);
 
-  useEffect(() => {
-    fetch("/Data/projects.json")
-      .then(res => res.json())
-      .then(data => setProjects(data))
-      .catch(() => setProjects([]));
-  }, []);
-
-  if (!projects.length) {
+  if (loading || !projects.length) {
     return (
       <section id="projects" className="py-16" style={{ background: 'var(--asu-ink)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -30,18 +25,7 @@ export default function Projects() {
     <>
       <section id="projects" className="py-16" style={{ background: 'var(--asu-ink)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-        >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 asu-text-glow" style={{ color: 'var(--heading-accent)' }}>
-            Projects
-          </h2>
-            <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'var(--underline-accent)' }} />
-        </motion.div>
+          <SectionHeader title="Projects" />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (

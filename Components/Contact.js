@@ -6,6 +6,7 @@ import { Input } from "@/Components/ui/input";
 import { Textarea } from "@/Components/ui/textarea";
 import { useTheme } from "@/Components/ThemeProvider";
 import emailjs from '@emailjs/browser';
+import SectionHeader from "@/Components/SectionHeader";
 
 export default function Contact() {
     const { theme } = useTheme();
@@ -94,20 +95,10 @@ export default function Contact() {
     return (
         <section id="contact" className="py-20 bg-white">
             <div className="container mx-auto px-6">
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-center mb-16"
-                >
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6 asu-text-glow" style={{ color: 'var(--heading-accent)' }}>
-                        Lets Connect
-                    </h2>
-                    <div className="w-24 h-1 mx-auto mb-8" style={{ background: 'var(--underline-accent)' }}></div>
-                    <p className="text-xl max-w-3xl mx-auto" style={{ color: '#444' }}>
-                        Open to collaborations, opportunities, or just a good tech chat.
-                    </p>
-                </motion.div>
+                <SectionHeader 
+                    title="Lets Connect" 
+                    subtitle="Open to collaborations, opportunities, or just a good tech chat." 
+                />
 
                 <div className="grid lg:grid-cols-2 gap-12">
                     {/* Contact Information */}

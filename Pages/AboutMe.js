@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
+import { throttle } from "@/utils/scroll";
 
 function TypewriterText({ lines, speed = 35, className = "" }) {
     const [text, setText] = useState("");
@@ -38,22 +39,26 @@ export default function AboutMe() {
     const textRef = useRef(null);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const y = window.scrollY * 0.02;
+        const handleScroll = throttle(() => {
+            const scrollY = window.scrollY;
+            
+            // Parallax for paper background
             if (paperRef.current) {
-                paperRef.current.style.transform = `translateY(${y}px)`;
+                paperRef.current.style.transform = `translateY(${scrollY * 0.02}px)`;
             }
+            
             // Subtle parallax for Scene 2 photo and text
-            const yPhoto = window.scrollY * 0.015;
-            const yText = window.scrollY * 0.01;
             if (photoRef.current) {
-                photoRef.current.style.transform = `translateY(${yPhoto}px) scale(2.10)`;
+                const yPhoto = scrollY * 0.015;
+                photoRef.current.style.transform = `translateY(${yPhoto}px)`;
                 photoRef.current.style.transformOrigin = 'left center';
             }
+            
             if (textRef.current) {
-                textRef.current.style.transform = `translateY(${yText}px)`;
+                textRef.current.style.transform = `translateY(${scrollY * 0.01}px)`;
             }
-        };
+        }, 16); // ~60fps throttling
+        
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
@@ -166,20 +171,10 @@ export default function AboutMe() {
                         whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="relative -mt-8"
-                        style={{ transform: 'scale(2.10)', transformOrigin: 'left center' }}
+                        className="relative"
+                        style={{ transformOrigin: 'left center' }}
                         ref={photoRef}
                     >
-                        {/* Tape corners */}
-                        <div className="absolute -top-4 -left-4 w-16 h-16 opacity-60" style={{
-                            background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%)',
-                            clipPath: 'polygon(0 0, 100% 0, 0 100%)'
-                        }} />
-                        <div className="absolute -top-4 -right-4 w-16 h-16 opacity-60" style={{
-                            background: 'linear-gradient(225deg, rgba(255,255,255,0.3) 0%, transparent 50%)',
-                            clipPath: 'polygon(100% 0, 100% 100%, 0 0)'
-                        }} />
-
                         <div className="relative border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-2">
                             <div className="relative aspect-[16/9] overflow-hidden">
                                 <Image
@@ -252,6 +247,10 @@ export default function AboutMe() {
 
             {/* SCENE 3 — Becoming (The Move, Self-Growth) */}
             <section className="min-h-screen flex items-center justify-center px-6 py-20 relative" style={{ background: "#000" }}>
+                {/* Soft radial gray gradient for depth */}
+                <div className="absolute inset-0 opacity-30" style={{
+                    background: "radial-gradient(ellipse at center, rgba(26,26,26,0.4) 0%, transparent 70%)"
+                }} />
                 {/* Dim city skyline background - using a dark gradient */}
                 <div className="absolute inset-0 opacity-20" style={{
                     background: "linear-gradient(to top, #000 0%, #1a1a1a 50%, #0a0a0a 100%)"
@@ -261,14 +260,22 @@ export default function AboutMe() {
                     initial={{ opacity: 0, y: 100 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 1.2 }}
+                    transition={{ duration: 1.5 }}
                     className="max-w-4xl mx-auto text-center relative z-10"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-12 text-white" style={{ 
-                        fontFamily: "'Playfair Display', Georgia, serif"
-                    }}>
+                    {/* Becoming title - slower fade */}
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1.5, delay: 0.3 }}
+                        className="text-4xl md:text-6xl font-bold mb-12 text-white" 
+                        style={{ 
+                            fontFamily: "'Playfair Display', Georgia, serif"
+                        }}
+                    >
                         Becoming
-                    </h2>
+                    </motion.h2>
                     
                     <div className="space-y-8 text-xl md:text-2xl leading-relaxed text-white/90 mb-8" style={{
                         fontFamily: "'Playfair Display', Georgia, serif"
@@ -277,40 +284,40 @@ export default function AboutMe() {
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
+                            transition={{ duration: 0.8, delay: 0.5 }}
                         >
-                            Moving to the U.S. flipped the world into grayscale.
+                            Moving to the U.S. flipped my world into grayscale.
                         </motion.p>
                         <motion.p
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.4 }}
+                            transition={{ duration: 0.8, delay: 0.7 }}
                         >
-                            New streets, new silence, new self.
+                            New streets. New silence. New self.
                         </motion.p>
                         <motion.p
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.6 }}
+                            transition={{ duration: 0.8, delay: 0.9 }}
                             className="relative inline-block"
                         >
-                            That's where adulting began — learning, unlearning, missing home, finding calm in chaos.
-                            {/* Amber/lilac neon underline */}
+                            That's where adulting began — learning, unlearning, missing home, finding calm inside chaos.
+                            {/* Golden underline glow */}
                             <span className="absolute bottom-0 left-0 w-full h-0.5" style={{
-                                background: "linear-gradient(90deg, transparent, #FFB800, #C77DFF, transparent)",
-                                boxShadow: "0 0 10px rgba(255, 184, 0, 0.5), 0 0 20px rgba(199, 125, 255, 0.3)"
+                                background: "linear-gradient(90deg, transparent, #FFC627, #FFB800, transparent)",
+                                boxShadow: "0 0 15px rgba(255, 198, 39, 0.6), 0 0 25px rgba(255, 184, 0, 0.4)"
                             }} />
                         </motion.p>
                     </div>
 
-                    {/* Handwritten annotation */}
+                    {/* Handwritten annotation - delayed appearance */}
                     <motion.div
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 1 }}
+                        transition={{ duration: 0.6, delay: 1.7 }}
                         className="mt-12 text-white/70 text-lg italic"
                         style={{
                             fontFamily: "'Caveat', cursive",
@@ -318,6 +325,21 @@ export default function AboutMe() {
                         }}
                     >
                         "Still calling mom for recipes."
+                    </motion.div>
+
+                    {/* Optional handwritten annotation in corner */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 2.2 }}
+                        className="absolute bottom-4 right-4 text-white/40 text-xs"
+                        style={{
+                            fontFamily: "'Caveat', cursive",
+                            transform: 'rotate(5deg)'
+                        }}
+                    >
+                        "probably overthinking everything right here ↑"
                     </motion.div>
                 </motion.div>
             </section>

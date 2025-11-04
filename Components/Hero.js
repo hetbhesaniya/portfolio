@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useTheme } from "@/Components/ThemeProvider";
+import { throttle } from "@/utils/scroll";
 
 export default function Hero() {
     const heroRef = useRef(null);
     const { theme } = useTheme();
 
     useEffect(() => {
-        const handleMouseMove = (e) => {
+        const handleMouseMove = throttle((e) => {
             if (!heroRef.current) return;
 
             const { clientX, clientY } = e;
@@ -20,13 +21,12 @@ export default function Hero() {
             const yPos = -(clientY / offsetHeight - 0.5) * 30;
 
             const bg = heroRef.current.querySelector('.parallax-bg');
-            if(bg) {
-                // Use a transition for smoother movement
+            if (bg) {
                 bg.style.transform = `translate(${xPos}px, ${yPos}px)`;
             }
-        };
+        }, 16); // ~60fps throttling
 
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 

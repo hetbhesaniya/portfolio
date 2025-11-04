@@ -1,24 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Briefcase, MapPin, Calendar, ChevronRight, Award } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/Components/ui/dialog";
 import { Badge } from "@/Components/ui/badge";
+import { useDataFetch } from "@/hooks/useDataFetch";
+import SectionHeader from "@/Components/SectionHeader";
 
 export default function Experience() {
-  const [jobs, setJobs] = useState([]);
+  const { data: jobs, loading } = useDataFetch("/Data/Experience.json");
   const [selectedExperience, setSelectedExperience] = useState(null);
 
-  useEffect(() => {
-    fetch("/Data/Experience.json")
-      .then(res => res.json())
-      .then(data => setJobs(data))
-      .catch(() => {
-        setJobs([]);
-      });
-  }, []);
-
-  if (!jobs.length) {
+  if (loading || !jobs.length) {
     return (
       <section id="experience" className="py-16" style={{ background: 'var(--asu-ink)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -32,18 +25,7 @@ export default function Experience() {
     <>
       <section id="experience" className="py-16" style={{ background: 'var(--asu-ink)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 asu-text-glow" style={{ color: 'var(--heading-accent)' }}>
-              Experience
-            </h2>
-            <div className="w-24 h-1 mx-auto rounded-full" style={{ background: 'var(--underline-accent)' }} />
-          </motion.div>
+          <SectionHeader title="Experience" />
 
           <div className="space-y-4">
             {jobs.map((job, index) => (
