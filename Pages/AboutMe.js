@@ -5,6 +5,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { throttle } from "@/utils/scroll";
+import AlternatingPolaroidSection from "@/Components/polaroids/AlternatingPolaroidSection";
 
 function TypewriterText({ lines, speed = 35, className = "" }) {
     const [text, setText] = useState("");
@@ -343,6 +344,14 @@ export default function AboutMe() {
                     </motion.div>
                 </motion.div>
             </section>
+
+            {/* Alternating Polaroid Section */}
+            <AlternatingPolaroidSection
+                onPostCreditOpen={() => {
+                    // TODO: open Post-credit overlay/modal
+                    console.info("Open Post-credit scene");
+                }}
+            />
 
             {/* SCENE 4 — Craft & Mindset (How You Think) */}
             <section className="min-h-screen flex items-center px-6 py-20 relative" style={{ background: "#fff" }}>
