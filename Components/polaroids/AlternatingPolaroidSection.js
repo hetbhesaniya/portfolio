@@ -9,116 +9,116 @@ const NEW_STREETS_ITEMS = [
     id: "deer",
     type: "image",
     src: "/new-streets/Deer.jpg",
-    alt: "A deer in a natural setting.",
-    caption: "deer."
-  },
-  {
-    id: "cooking",
-    type: "image",
-    src: "/new-streets/cooking.JPG",
-    alt: "Cooking scene, a moment in the kitchen.",
-    caption: "cooking."
+    alt: "A deer at the fence—welcome to elsewhere.",
+    caption: "a deer at the fence."
   },
   {
     id: "bus-stop",
     type: "image",
     src: "/new-streets/bus-stop.jpg",
-    alt: "Empty bus stop bench, quiet moment.",
-    caption: "bus-stop."
+    alt: "I learned bus lines before shortcuts.",
+    caption: "bus lines before shortcuts."
+  },
+  {
+    id: "cooking",
+    type: "image",
+    src: "/new-streets/cooking.JPG",
+    alt: "Burnt dinner twice; the third tasted like mine.",
+    caption: "burnt dinner, then mine."
   },
   {
     id: "sunset-at-lake",
     type: "image",
     src: "/new-streets/sunset-at-lake.jpg",
-    alt: "Sunset reflecting on a calm lake.",
-    caption: "sunset at lake."
+    alt: "Sunset at the lake reset everything.",
+    caption: "sunset at the lake."
   },
   {
     id: "sunset",
     type: "video",
     src: "/new-streets/sunset.webm",
     poster: "/new-streets/sunset-at-lake.jpg",
-    alt: "Sunset video, peaceful moment.",
-    caption: "sunset.",
+    alt: "The Circle - people who turned noise into music.",
+    caption: "the circle.",
     star: true
   }
 ];
 
-const DESK_BUILD_ITEMS = [
+const CIRCLE_ITEMS = [
   {
     id: "celebration",
     type: "video",
     src: "/desk-build/Celebration.webm",
     poster: "/desk-build/Friends.jpg",
-    alt: "Celebration moment, joy and accomplishment.",
-    caption: "celebration."
-  },
-  {
-    id: "friends",
-    type: "image",
-    src: "/desk-build/Friends.jpg",
-    alt: "Friends together, shared moments.",
-    caption: "friends."
+    alt: "Confetti in a small room was enough.",
+    caption: "confetti in a small room."
   },
   {
     id: "gelato",
     type: "image",
     src: "/desk-build/gelato.JPG",
-    alt: "Gelato, a sweet treat.",
-    caption: "gelato."
+    alt: "Gelato after labs, laughter on loop.",
+    caption: "gelato after labs."
   },
   {
     id: "me-at-horseshoebend",
     type: "image",
     src: "/desk-build/Me-at-horseshoebend.jpg",
-    alt: "Me at Horseshoe Bend, adventure moment.",
-    caption: "me at horseshoe bend."
+    alt: "We drove to the bend to feel small.",
+    caption: "we drove to the bend."
   },
   {
     id: "my-bestfriends",
     type: "image",
     src: "/desk-build/my-bestfriends.JPG",
-    alt: "My best friends, treasured relationships.",
-    caption: "my best friends."
+    alt: "Work got better when we did it.",
+    caption: "work got better."
+  },
+  {
+    id: "friends",
+    type: "image",
+    src: "/desk-build/Friends.jpg",
+    alt: "People who turned noise into music.",
+    caption: "people who turned noise into music."
   }
 ];
 
 const SMALL_JOYS_ITEMS = [
   {
-    id: "my-niece",
-    type: "video",
-    src: "/small-joys/My-niece.webm",
-    poster: "/small-joys/Home.jpeg",
-    alt: "My niece, precious family moment.",
-    caption: "my niece."
-  },
-  {
-    id: "home",
-    type: "image",
-    src: "/small-joys/Home.jpeg",
-    alt: "Home, a place of comfort and belonging.",
-    caption: "home."
-  },
-  {
-    id: "sister-with-her-daughter",
-    type: "image",
-    src: "/small-joys/Sister-with-her-daughter.jpg",
-    alt: "Sister with her daughter, family love.",
-    caption: "sister with her daughter."
-  },
-  {
     id: "dad",
     type: "image",
     src: "/small-joys/DAD.JPG",
-    alt: "Dad, family bond.",
-    caption: "dad."
+    alt: "Dad is the blueprint.",
+    caption: "dad is the blueprint."
   },
   {
     id: "mom",
     type: "image",
     src: "/small-joys/Mom.jpeg",
-    alt: "Mom, unconditional love.",
-    caption: "mom."
+    alt: "Mom is the heartbeat.",
+    caption: "mom is the heartbeat."
+  },
+  {
+    id: "sister-with-her-daughter",
+    type: "image",
+    src: "/small-joys/Sister-with-her-daughter.jpg",
+    alt: "My sister's steel; my niece's light.",
+    caption: "sister's steel, niece's light."
+  },
+  {
+    id: "my-niece",
+    type: "video",
+    src: "/small-joys/My-niece.webm",
+    poster: "/small-joys/Home.jpeg",
+    alt: "My niece's light.",
+    caption: "niece's light."
+  },
+  {
+    id: "home",
+    type: "image",
+    src: "/small-joys/Home.jpeg",
+    alt: "Home is people.",
+    caption: "home is people."
   }
 ];
 
@@ -228,10 +228,10 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                   New Streets
                 </h2>
                 <p
-                  className="text-xs uppercase tracking-[0.15em] mb-8 font-mono"
+                  className="text-xs tracking-[0.15em] mb-8 font-mono"
                   style={{ color: '#F4F2EE', opacity: 0.7 }}
                 >
-                  FRAMES FROM THE FIRST MONTHS
+                  frames from the first months
                 </p>
                 <div
                   className="space-y-6 text-lg leading-relaxed"
@@ -240,19 +240,17 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                     color: '#F4F2EE'
                   }}
                 >
-                  <p>Moving to the U.S. flipped my world into grayscale.</p>
-                  <p>New streets. New silence. New self.</p>
-                  <p>
-                    That's where adulting began — learning, unlearning, missing home, finding calm inside chaos.
-                  </p>
-                  <p className="italic" style={{ opacity: 0.8 }}>
-                    still calling mom for recipes.
+                  <p>A deer at the fence—welcome to elsewhere.</p>
+                  <p>I learned bus lines before shortcuts.</p>
+                  <p>Burnt dinner twice; the third tasted like mine.</p>
+                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
+                    Sunset at the lake reset everything.
                   </p>
                 </div>
               </motion.div>
             </motion.div>
 
-            {/* Row 2: The Desk & The Build - Stack right, text left */}
+            {/* Row 2: The Circle - Stack right, text left */}
             <motion.div
               variants={rowVariants}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
@@ -271,13 +269,13 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                     color: '#F4F2EE'
                   }}
                 >
-                  The Desk & The Build
+                  The Circle
                 </h2>
                 <p
-                  className="text-xs uppercase tracking-[0.15em] mb-8 font-mono"
+                  className="text-xs tracking-[0.15em] mb-8 font-mono"
                   style={{ color: '#F4F2EE', opacity: 0.7 }}
                 >
-                  TOOLS, HABITS, TEMPO
+                  people who turned noise into music
                 </p>
                 <div
                   className="space-y-6 text-lg leading-relaxed"
@@ -286,18 +284,21 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                     color: '#F4F2EE'
                   }}
                 >
-                  <p>Perfection isn't control — it's care.</p>
-                  <p>I listen first, then ship.</p>
-                  <p>If it doesn't move people, it isn't done.</p>
+                  <p>Confetti in a small room was enough.</p>
+                  <p>Gelato after labs, laughter on loop.</p>
+                  <p>We drove to the bend to feel small.</p>
+                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
+                    Work got better when we did it.
+                  </p>
                 </div>
               </motion.div>
               <div className="order-1 lg:order-2">
                 <PolaroidStack
-                  title="The Desk & The Build"
-                  items={DESK_BUILD_ITEMS}
+                  title="The Circle"
+                  items={CIRCLE_ITEMS}
                   placement="right"
                   orientation="landscape"
-                  onOpenLightbox={(startIndex) => openLightbox(DESK_BUILD_ITEMS, startIndex)}
+                  onOpenLightbox={(startIndex) => openLightbox(CIRCLE_ITEMS, startIndex)}
                   onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
@@ -334,10 +335,10 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                   Small Joys
                 </h2>
                 <p
-                  className="text-xs uppercase tracking-[0.15em] mb-8 font-mono"
+                  className="text-xs tracking-[0.15em] mb-8 font-mono"
                   style={{ color: '#F4F2EE', opacity: 0.7 }}
                 >
-                  THE LITTLE THINGS
+                  home is people
                 </p>
                 <div
                   className="space-y-6 text-lg leading-relaxed"
@@ -346,10 +347,11 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                     color: '#F4F2EE'
                   }}
                 >
-                  <p>The little things keep the big things human.</p>
-                  <p>I'm 75% happy on most days — the rest is curiosity.</p>
-                  <p className="italic" style={{ opacity: 0.8 }}>
-                    still learning. still dancing between logic and emotion.
+                  <p>Dad is the blueprint.</p>
+                  <p>Mom is the heartbeat.</p>
+                  <p>My sister's steel; my niece's light.</p>
+                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
+                    This is my why—every build is a thank-you.
                   </p>
                 </div>
               </motion.div>

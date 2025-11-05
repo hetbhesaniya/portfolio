@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -37,6 +37,8 @@ export default function PolaroidStack({
   const [showHint, setShowHint] = useState(false);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState(0); // -1 for prev, 1 for next
   const containerRef = useRef(null);
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -85,31 +87,52 @@ export default function PolaroidStack({
     const diff = touchStartX.current - touchEndX.current;
     const threshold = 50;
 
-    if (Math.abs(diff) > threshold) {
+    if (Math.abs(diff) > threshold && !isAnimating) {
       if (diff > 0) {
         // Swipe left - next
+        setDirection(1);
+        setIsAnimating(true);
         setCurrentIndex((prev) => (prev + 1) % items.length);
+        setTimeout(() => setIsAnimating(false), 600);
       } else {
         // Swipe right - previous
+        setDirection(-1);
+        setIsAnimating(true);
         setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+        setTimeout(() => setIsAnimating(false), 600);
       }
     }
   };
 
   const handleNext = () => {
+    if (isAnimating) return;
     handleInteraction();
+    setDirection(1);
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev + 1) % items.length);
+    setTimeout(() => setIsAnimating(false), 600);
   };
 
   const handlePrevious = () => {
+    if (isAnimating) return;
     handleInteraction();
+    setDirection(-1);
+    setIsAnimating(true);
     setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
+    setTimeout(() => setIsAnimating(false), 600);
   };
 
   const topCard = items[currentIndex];
-  const visibleStack = items.slice(currentIndex, currentIndex + 3).concat(
-    items.slice(0, Math.max(0, 3 - (items.length - currentIndex)))
-  );
+  
+  // Calculate visible stack with proper wrapping
+  const visibleStack = useMemo(() => {
+    const stack = [];
+    for (let i = 0; i < Math.min(3, items.length); i++) {
+      const idx = (currentIndex + i) % items.length;
+      stack.push({ ...items[idx], stackPosition: i });
+    }
+    return stack;
+  }, [currentIndex, items]);
 
   return (
     <div className={`relative ${className}`} ref={containerRef}>
@@ -133,10 +156,14 @@ export default function PolaroidStack({
 
       {/* Stack container */}
       <div
-        className="relative max-w-[340px] w-full mx-auto"
+        className={`relative w-full mx-auto ${orientation === "landscape" ? "max-w-[420px]" : "max-w-[340px]"}`}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ minHeight: '380px' }}
+        style={{ 
+          minHeight: orientation === "landscape" ? '340px' : '380px',
+          perspective: '1200px',
+          perspectiveOrigin: 'center center'
+        }}
       >
         {/* Navigation arrows */}
         {items.length > 1 && (
@@ -157,7 +184,9 @@ export default function PolaroidStack({
             </button>
           </>
         )}
-        {visibleStack.map((item, stackIndex) => {
+        {visibleStack.map((itemWithPos, mapIndex) => {
+          const stackIndex = itemWithPos.stackPosition;
+          const item = items.find(i => i.id === itemWithPos.id) || itemWithPos;
           const isTop = stackIndex === 0;
           const zIndex = 10 - stackIndex;
           // More visible peeking - alternate left/right for natural stack
@@ -168,17 +197,37 @@ export default function PolaroidStack({
           return (
             <motion.figure
               key={`${item.id}-${currentIndex}-${stackIndex}`}
-              initial={isTop && !prefersReducedMotion ? { opacity: 0, y: 16 } : { opacity: stackIndex === 0 ? 1 : 0.9 }}
-              animate={isTop ? { opacity: 1, y: 0 } : { opacity: stackIndex === 1 ? 0.9 : 0.8 }}
-              transition={{ duration: 0.4 }}
+              initial={isTop && isAnimating ? {
+                opacity: 0,
+                rotateY: direction === 1 ? 90 : -90,
+                scale: 0.85,
+                x: direction === 1 ? 100 : -100
+              } : {
+                opacity: stackIndex === 0 ? 1 : stackIndex === 1 ? 0.9 : 0.8,
+                rotateY: 0,
+                scale: stackIndex === 0 ? 1 : stackIndex === 1 ? 0.97 : 0.94,
+                x: offsetX,
+                y: offsetY
+              }}
+              animate={{ 
+                opacity: isTop ? 1 : stackIndex === 1 ? 0.9 : 0.8,
+                rotateY: isTop ? 0 : 0,
+                scale: isTop ? 1 : stackIndex === 1 ? 0.97 : 0.94,
+                x: offsetX,
+                y: offsetY,
+                rotate: rotation
+              }}
+              transition={{ 
+                duration: isTop && isAnimating ? 0.6 : 0.3,
+                ease: isTop && isAnimating ? [0.34, 1.56, 0.64, 1] : "easeOut"
+              }}
               className="absolute group cursor-pointer"
               style={{
-                zIndex,
-                left: `${offsetX}px`,
-                top: `${offsetY}px`,
-                transform: `rotate(${rotation}deg)`,
+                zIndex: isTop && isAnimating ? 100 : zIndex,
                 filter: 'grayscale(100%)',
-                width: stackIndex === 0 ? '100%' : stackIndex === 1 ? '97%' : '94%'
+                width: stackIndex === 0 ? '100%' : stackIndex === 1 ? '97%' : '94%',
+                transformStyle: 'preserve-3d',
+                backfaceVisibility: 'hidden'
               }}
               tabIndex={-1}
               role="presentation"
@@ -227,7 +276,7 @@ export default function PolaroidStack({
                           fill
                           className="object-cover"
                           loading="lazy"
-                          sizes="(max-width: 768px) 340px, 340px"
+                          sizes={orientation === "landscape" ? "(max-width: 768px) 420px, 420px" : "(max-width: 768px) 340px, 340px"}
                           quality={75}
                         />
                       )}
@@ -239,7 +288,7 @@ export default function PolaroidStack({
                       fill
                       className="object-cover"
                       loading={isTop ? "eager" : "lazy"}
-                      sizes="(max-width: 768px) 340px, 340px"
+                      sizes={orientation === "landscape" ? "(max-width: 768px) 420px, 420px" : "(max-width: 768px) 340px, 340px"}
                       quality={isTop ? 85 : 70}
                     />
                   )}
@@ -271,30 +320,10 @@ export default function PolaroidStack({
                 )}
               </div>
 
-              {/* Gold count badge - only on top card */}
-              {isTop && (
-                <div
-                  className="absolute right-4 bg-[#E9C46A] text-[#0A0A0A] text-xs font-bold px-2 py-0.5 rounded-sm shadow-md"
-                  style={{ 
-                    zIndex: 25,
-                    bottom: '48px'
-                  }}
-                >
-                  {items.length}
-                </div>
-              )}
             </motion.figure>
           );
         })}
       </div>
-
-
-      {/* Mobile indicator */}
-      {isTouchDevice && (
-        <div className="mt-2 text-center text-xs" style={{ color: '#F4F2EE', opacity: 0.6 }}>
-          {currentIndex + 1} / {items.length}
-        </div>
-      )}
     </div>
   );
 }
