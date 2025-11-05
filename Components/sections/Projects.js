@@ -2,10 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ExternalLink, Github, Eye, Code2 } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/Components/ui/dialog";
-import { Badge } from "@/Components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import SectionHeader from "@/Components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 
 export default function Projects() {
   const { data: projects, loading } = useDataFetch("/Data/projects.json");

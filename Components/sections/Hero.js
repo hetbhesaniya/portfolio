@@ -2,7 +2,7 @@ import { useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
-import { useTheme } from "@/Components/layout/ThemeProvider";
+import { useTheme } from "@/components/layout/ThemeProvider";
 import { throttle } from "@/utils/scroll";
 
 export default function Hero() {

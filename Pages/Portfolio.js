@@ -1,12 +1,12 @@
-import Navigation from "../Components/layout/Navigation";
-import Hero from "../Components/sections/Hero";
-import About from "../Components/sections/About";
-import Experience from "../Components/sections/Experience";
-import Skills from "../Components/sections/Skills";
-import Projects from "../Components/sections/Projects";
-import Certifications from "../Components/sections/Certifications";
-import Contact from "../Components/sections/Contact";
-import Footer from "../Components/layout/Footer";
+import Navigation from "../components/layout/Navigation";
+import Hero from "../components/sections/Hero";
+import About from "../components/sections/About";
+import Experience from "../components/sections/Experience";
+import Skills from "../components/sections/Skills";
+import Projects from "../components/sections/Projects";
+import Certifications from "../components/sections/Certifications";
+import Contact from "../components/sections/Contact";
+import Footer from "../components/layout/Footer";
 
 export default function Portfolio() {
     return (

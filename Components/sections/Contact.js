@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, CheckCircle, XCircle } from "lucide-react";
-import { Button } from "@/Components/ui/button";
-import { Input } from "@/Components/ui/input";
-import { Textarea } from "@/Components/ui/textarea";
-import { useTheme } from "@/Components/layout/ThemeProvider";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { useTheme } from "@/components/layout/ThemeProvider";
 import emailjs from '@emailjs/browser';
-import SectionHeader from "@/Components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 
 export default function Contact() {
     const { theme } = useTheme();

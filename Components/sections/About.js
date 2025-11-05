@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { User, Award, Coffee } from "lucide-react";
-import SectionHeader from "@/Components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 
 export default function About() {
     const stats = [

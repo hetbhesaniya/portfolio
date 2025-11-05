@@ -16,6 +16,6 @@ Add your personal photos here!
 5. `story5.jpg` - Urban/city exploration
 6. `story6.jpg` - Nature/wildlife
 
-You can update the titles, locations, captions, and moods in `Pages/AboutMe.js` to match your actual photos!
+You can update the titles, locations, captions, and moods in `pages/AboutMe.js` to match your actual photos!
 
 

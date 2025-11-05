@@ -6,7 +6,7 @@ A modern, cinematic portfolio website built with Next.js, featuring a black-and-
 
 ```
 ASU Portfolio/
-├── Components/              # React components organized by purpose
+├── components/              # React components organized by purpose
 │   ├── sections/           # Main page sections
 │   │   ├── About.js
 │   │   ├── Certifications.js
@@ -32,7 +32,7 @@ ASU Portfolio/
 │       ├── dialog.js
 │       ├── input.js
 │       └── textarea.js
-├── Pages/                  # Next.js pages
+├── pages/                  # Next.js pages
 │   ├── _app.js            # App wrapper
 │   ├── 404.js             # 404 error page
 │   ├── AboutMe.js         # About page with cinematic sections
@@ -128,7 +128,7 @@ npm start
 
 ## 📦 Component Organization
 
-### Sections (`Components/sections/`)
+### Sections (`components/sections/`)
 Main content sections used across the portfolio:
 - `Hero.js` - Landing section
 - `About.js` - About section
@@ -138,27 +138,27 @@ Main content sections used across the portfolio:
 - `Certifications.js` - Certifications display
 - `Contact.js` - Contact form
 
-### Polaroids (`Components/polaroids/`)
+### Polaroids (`components/polaroids/`)
 Specialized components for the cinematic About page:
 - `AlternatingPolaroidSection.js` - Main section component
 - `PolaroidStack.js` - Individual polaroid stack with navigation
 - `Lightbox.js` - Full-screen gallery viewer
 - `FilmGrain.js` - Texture overlay
 
-### Layout (`Components/layout/`)
+### Layout (`components/layout/`)
 Site-wide layout components:
 - `Navigation.js` - Header navigation
 - `Footer.js` - Site footer
 - `ThemeProvider.js` - Theme context provider
 
-### Common (`Components/common/`)
+### Common (`components/common/`)
 Reusable components:
 - `SectionHeader.js` - Standardized section headers
 
 ## 🔧 Configuration
 
 ### Theme Configuration
-Edit `Components/layout/ThemeProvider.js` to modify theme settings.
+Edit `components/layout/ThemeProvider.js` to modify theme settings.
 
 ### Data Sources
 JSON data files in `public/Data/` can be edited to update content:

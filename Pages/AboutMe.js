@@ -5,7 +5,8 @@ import Head from "next/head";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { throttle } from "@/utils/scroll";
-import AlternatingPolaroidSection from "@/Components/polaroids/AlternatingPolaroidSection";
+import AlternatingPolaroidSection from "@/components/polaroids/AlternatingPolaroidSection";
+import CraftCareLetterbox from "@/components/sections/CraftCareLetterbox";
 
 function TypewriterText({ lines, speed = 35, className = "" }) {
     const [text, setText] = useState("");
@@ -348,119 +349,12 @@ export default function AboutMe() {
             {/* Alternating Polaroid Section */}
             <AlternatingPolaroidSection
                 onPostCreditOpen={() => {
-                    // TODO: open Post-credit overlay/modal
-                    console.info("Open Post-credit scene");
+                    // Post-credit scene handler
                 }}
             />
 
-            {/* SCENE 4 — Craft & Mindset (How You Think) */}
-            <section className="min-h-screen flex items-center px-6 py-20 relative" style={{ background: "#fff" }}>
-                <div className="max-w-6xl mx-auto w-full">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 50 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-4xl md:text-6xl font-bold mb-16 text-center text-black" style={{ 
-                            fontFamily: "'Playfair Display', Georgia, serif"
-                        }}>
-                        Craft & Mindset
-                    </motion.h2>
-
-                    <div className="grid md:grid-cols-2 gap-6">
-                        {[
-                            { text: "Perfection isn't control — it's care.", emoji: "✨" },
-                            { text: "I like when design feels calm and honest.", emoji: "" },
-                            { text: "I overthink until things make sense.", emoji: "💭" },
-                            { text: "Code is my logic; emotion is my debug tool.", emoji: "" }
-                        ].map((quote, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 30, rotate: -1 }}
-                                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
-                                viewport={{ once: true, amount: 0.3 }}
-                                transition={{ duration: 0.6, delay: index * 0.1 }}
-                                whileHover={{ y: -5, rotate: 0.5, scale: 1.02 }}
-                                className="p-8 border-2 border-black/10 bg-white shadow-lg relative group"
-                                style={{
-                                    boxShadow: "0 4px 20px rgba(0,0,0,0.08)"
-                                }}
-                            >
-                                <p className="text-xl md:text-2xl text-black leading-relaxed" style={{
-                                    fontFamily: "'Playfair Display', Georgia, serif"
-                                }}>
-                                    {quote.text}
-                                </p>
-                                {quote.emoji && (
-                                    <span className="absolute top-4 right-4 text-2xl opacity-60">{quote.emoji}</span>
-                                )}
-                                {/* Grain effect on hover */}
-                                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 pointer-events-none transition-opacity" style={{
-                                    backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\\'0 0 200 200\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'g\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'0.9\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23g)\\'/%3E%3C/svg%3E')"
-                                }} />
-                            </motion.div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* SCENE 5 — People & Care (Emotional Side) */}
-            <section className="min-h-screen flex items-center justify-center px-6 py-20 relative" style={{ background: "#000" }}>
-                {/* Soft grayscale background with photos */}
-                <div className="absolute inset-0 opacity-10">
-                    <div className="grid grid-cols-4 gap-4 h-full w-full">
-                        {['/photos/people1.jpg', '/photos/people2.jpg', '/photos/people3.jpg', '/photos/people4.jpg'].map((src, i) => (
-                            <div key={i} className="relative overflow-hidden">
-                                <Image
-                                    src={src}
-                                    alt=""
-                                    fill
-                                    className="object-cover grayscale blur-sm"
-                                    onError={(e) => { e.target.style.display = 'none'; }}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Black overlay with glowing text */}
-                <div className="absolute inset-0 bg-black/70" />
-                
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 1 }}
-                    className="max-w-4xl mx-auto text-center relative z-10"
-                >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-12 text-white" style={{ 
-                        fontFamily: "'Playfair Display', Georgia, serif",
-                        textShadow: "0 0 30px rgba(255,255,255,0.3)"
-                    }}>
-                        People & Care
-                    </h2>
-
-                    <div className="space-y-8 text-xl md:text-2xl leading-relaxed text-white/90 mb-8" style={{
-                        fontFamily: "'Playfair Display', Georgia, serif"
-                    }}>
-                        <p>I care about the people in my life — deeply.</p>
-                        <p>I love seeing others win, sometimes more than myself.</p>
-                        <p className="text-white/70 italic">If you ever become my friend, you'll feel it.</p>
-                    </div>
-
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.5 }}
-                        className="mt-12 text-white/60 text-lg italic"
-                        style={{
-                            fontFamily: "'Caveat', cursive"
-                        }}
-                    >
-                        "That's my superpower, I guess."
-                    </motion.div>
-                </motion.div>
-            </section>
+            {/* Craft & Mindset • People & Care Letterboxed Title Card */}
+            <CraftCareLetterbox />
 
             {/* SCENE 6 — Today (Present & Drive) */}
             <section className="min-h-screen flex items-center justify-center px-6 py-20 relative">

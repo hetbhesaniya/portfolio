@@ -41,7 +41,8 @@ export default function Lightbox({
       setCurrentIndex(startIndex);
       preloadNeighbors(startIndex);
     }
-  }, [isOpen, startIndex]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isOpen, startIndex]);
 
   useEffect(() => {
     if (isOpen && items[currentIndex]?.type === "video" && videoRef.current) {

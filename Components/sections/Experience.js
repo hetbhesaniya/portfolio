@@ -2,10 +2,10 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Briefcase, MapPin, Calendar, ChevronRight, Award } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/Components/ui/dialog";
-import { Badge } from "@/Components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Badge } from "@/components/ui/badge";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import SectionHeader from "@/Components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 
 export default function Experience() {
   const { data: jobs, loading } = useDataFetch("/Data/Experience.json");
@@ -203,24 +203,21 @@ export default function Experience() {
                   Key Achievements
                 </h4>
                 <div className="space-y-3">
-                  {selectedExperience.description.map((item, i) => {
-                    if (item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support')) {
-                      return (
-                        <div
-                          key={i}
-                          className="p-3 rounded-lg flex items-start gap-3"
-                          style={{
-                            background: 'var(--accent-bg-soft)',
-                            border: '1px solid var(--accent-border-soft)'
-                          }}
-                        >
-                          <span className="text-xl">🎯</span>
-                          <span style={{ color: 'var(--asu-text)' }}>{item}</span>
-                        </div>
-                      );
-                    }
-                    return null;
-                  })}
+                  {selectedExperience.description
+                    .filter(item => item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support'))
+                    .map((item, i) => (
+                      <div
+                        key={i}
+                        className="p-3 rounded-lg flex items-start gap-3"
+                        style={{
+                          background: 'var(--accent-bg-soft)',
+                          border: '1px solid var(--accent-border-soft)'
+                        }}
+                      >
+                        <span className="text-xl">🎯</span>
+                        <span style={{ color: 'var(--asu-text)' }}>{item}</span>
+                      </div>
+                    ))}
                 </div>
               </div>
 

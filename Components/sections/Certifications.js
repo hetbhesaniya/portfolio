@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, ExternalLink, Calendar, Building2 } from "lucide-react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import SectionHeader from "@/Components/common/SectionHeader";
+import SectionHeader from "@/components/common/SectionHeader";
 
 export default function Certifications() {
   const { data: certifications, loading } = useDataFetch("/Data/certifications.json");

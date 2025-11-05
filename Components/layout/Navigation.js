@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "./ThemeProvider";
 import { useRouter } from "next/router";
-import { throttle, debounce } from "@/utils/scroll";
+import { throttle } from "@/utils/scroll";
 
 // Pitchfork Icon Component - uses PNG images based on theme
 const PitchforkIcon = ({ size = 24, className = "" }) => {
