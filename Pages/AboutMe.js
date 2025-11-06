@@ -5,10 +5,10 @@ import Head from "next/head";
 import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 import { throttle } from "@/utils/scroll";
-import AlternatingPolaroidSection from "@/components/polaroids/AlternatingPolaroidSection";
+import AlternatingPolaroidSection from "@/Components/polaroids/AlternatingPolaroidSection";
 import CraftCareLetterbox from "@/components/sections/CraftCareLetterbox";
 
-function TypewriterText({ lines, speed = 35, className = "" }) {
+function TypewriterText({ lines, speed = 35, className = "", style = {} }) {
     const [text, setText] = useState("");
     const full = useMemo(() => lines.join("\n\n"), [lines]);
 
@@ -26,11 +26,16 @@ function TypewriterText({ lines, speed = 35, className = "" }) {
         return () => clearInterval(id);
     }, [full, speed]);
 
+    const defaultStyle = {
+        fontFamily: "'Playfair Display', Georgia, serif",
+        color: "#f4f2ee"
+    };
+
     return (
-        <pre className={`whitespace-pre-wrap ${className}`} style={{ fontFamily: "'Playfair Display', Georgia, serif", color: "#f4f2ee" }}>
+        <div className={`whitespace-pre-wrap ${className}`} style={{ ...defaultStyle, ...style, margin: 0, padding: '0 8px', overflow: 'visible', display: 'block' }}>
             {text}
-            <span className="animate-pulse">|</span>
-        </pre>
+            <span className="animate-pulse" style={{ color: style.color || defaultStyle.color }}>|</span>
+        </div>
     );
 }
 
@@ -351,6 +356,15 @@ export default function AboutMe() {
                 onPostCreditOpen={() => {
                     // Post-credit scene handler
                 }}
+                newStreetsCaption={{
+                    title: "Deer at the fence",
+                    meta: ["TEMPE, AZ", "50 MM", "ISO 400", "ROLL 02 / F03"],
+                    oneLiner: "Sunset at the lake reset everything."
+                }}
+                circleCaption={{
+                    title: "Confetti in a small room",
+                    meta: ["MESA, AZ", "1/125S", "F/2.8", "ROLL 02 / F07"]
+                }}
             />
 
             {/* Craft & Mindset • People & Care Letterboxed Title Card */}
@@ -404,52 +418,65 @@ export default function AboutMe() {
                     backgroundImage: "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23000000\\' fill-opacity=\\'0.03\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
                 }} />
 
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5 }}
+                className="max-w-3xl mx-auto text-center relative z-10"
+                style={{ padding: "0 24px", overflow: "visible" }}
+            >
+                <TypewriterText
+                    speed={50}
+                    lines={[
+                        "Still learning.",
+                        "Still dancing between logic and emotion.",
+                        "Always curious."
+                    ]}
+                    className="text-3xl md:text-4xl mb-16 leading-relaxed"
+                    style={{
+                        color: "#000000",
+                        fontWeight: 600,
+                        fontFamily: "\"Playfair Display\", Georgia, serif",
+                        textAlign: "center",
+                        padding: "0 8px"
+                    }}
+                />
+
+                {/* Signature */}
                 <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 3 }}
+                    className="mb-12 text-2xl"
+                    style={{
+                        fontFamily: "\"Caveat\", cursive",
+                        color: "#1a1a1a",
+                        fontWeight: 500
+                    }}
+                >
+                    — Het
+                </motion.div>
+
+                {/* Back button */}
+                <motion.button
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5 }}
-                    className="max-w-3xl mx-auto text-center relative z-10"
+                    transition={{ duration: 1, delay: 3.5 }}
+                    whileHover={{ scale: 1.05, backgroundColor: "#000000", color: "#ffffff", borderColor: "#000000" }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => router.push("/Portfolio")}
+                    className="px-8 py-4 border-2 transition-all duration-300 rounded-sm text-lg font-medium"
+                    style={{
+                        fontFamily: "\"Inter\", sans-serif",
+                        color: "#000000",
+                        borderColor: "#333333",
+                        backgroundColor: "transparent"
+                    }}
                 >
-                    <TypewriterText
-                        speed={50}
-                        lines={[
-                            "Still learning.",
-                            "Still dancing between logic and emotion.",
-                            "Always curious."
-                        ]}
-                        className="text-center text-3xl md:text-4xl text-black/90 mb-16 leading-relaxed"
-                    />
-
-                    {/* Signature */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 3 }}
-                        className="mb-12 text-black/60 text-2xl"
-                        style={{
-                            fontFamily: "'Caveat', cursive"
-                        }}
-                    >
-                        — Het
-                    </motion.div>
-
-                    {/* Back button */}
-                    <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 1, delay: 3.5 }}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => router.push('/Portfolio')}
-                        className="px-8 py-4 border-2 border-black/20 text-black/80 hover:bg-black hover:text-white hover:border-black transition-all duration-300 rounded-sm text-lg font-medium"
-                        style={{
-                            fontFamily: "'Inter', sans-serif"
-                        }}
-                    >
-                        Back to Portfolio →
-                    </motion.button>
-                </motion.div>
-            </section>
-        </div>
-    );
+                    Back to Portfolio →
+                </motion.button>
+            </motion.div>
+        </section>
+    </div>
+);
 }

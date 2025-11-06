@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import PolaroidStack from "./PolaroidStack";
 import Lightbox from "./Lightbox";
 import FilmGrain from "./FilmGrain";
+import TitleTag from "./TitleTag";
 
 const NEW_STREETS_ITEMS = [
   {
     id: "deer",
     type: "image",
     src: "/new-streets/Deer.jpg",
-    alt: "A deer at the fence—welcome to elsewhere.",
+    alt: "Deer at the fence",
     caption: "a deer at the fence."
   },
   {
@@ -50,7 +51,7 @@ const CIRCLE_ITEMS = [
     type: "video",
     src: "/desk-build/Celebration.webm",
     poster: "/desk-build/Friends.jpg",
-    alt: "Confetti in a small room was enough.",
+    alt: "Confetti in a small room",
     caption: "confetti in a small room."
   },
   {
@@ -122,7 +123,12 @@ const SMALL_JOYS_ITEMS = [
   }
 ];
 
-export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {} }) {
+export default function AlternatingPolaroidSection({ 
+  onPostCreditOpen = () => {},
+  newStreetsCaption = null,
+  circleCaption = null,
+  smallJoysCaption = null
+}) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxItems, setLightboxItems] = useState([]);
   const [lightboxStartIndex, setLightboxStartIndex] = useState(0);
@@ -198,7 +204,7 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
             className="space-y-24"
           >
             {/* Row 1: New Streets - Stack left, text right */}
-            <motion.div
+            <motion.figure
               variants={rowVariants}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
@@ -211,87 +217,43 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                   onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
-              <motion.div
+              <motion.figcaption
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-1 lg:order-2"
+                className="order-1 lg:order-2 self-center"
               >
-                <h2
-                  className="text-4xl md:text-5xl font-bold mb-3"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  New Streets
-                </h2>
-                <p
-                  className="text-xs tracking-[0.15em] mb-8 font-mono"
-                  style={{ color: '#F4F2EE', opacity: 0.7 }}
-                >
-                  frames from the first months
-                </p>
-                <div
-                  className="space-y-6 text-lg leading-relaxed"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  <p>A deer at the fence—welcome to elsewhere.</p>
-                  <p>I learned bus lines before shortcuts.</p>
-                  <p>Burnt dinner twice; the third tasted like mine.</p>
-                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
-                    Sunset at the lake reset everything.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
+                {newStreetsCaption && (
+                  <TitleTag
+                    title={newStreetsCaption.title}
+                    meta={newStreetsCaption.meta}
+                    oneLiner={newStreetsCaption.oneLiner}
+                  />
+                )}
+              </motion.figcaption>
+            </motion.figure>
 
             {/* Row 2: The Circle - Stack right, text left */}
-            <motion.div
+            <motion.figure
               variants={rowVariants}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
-              <motion.div
+              <motion.figcaption
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-2 lg:order-1"
+                className="order-2 lg:order-1 self-center"
               >
-                <h2
-                  className="text-4xl md:text-5xl font-bold mb-3"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  The Circle
-                </h2>
-                <p
-                  className="text-xs tracking-[0.15em] mb-8 font-mono"
-                  style={{ color: '#F4F2EE', opacity: 0.7 }}
-                >
-                  people who turned noise into music
-                </p>
-                <div
-                  className="space-y-6 text-lg leading-relaxed"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  <p>Confetti in a small room was enough.</p>
-                  <p>Gelato after labs, laughter on loop.</p>
-                  <p>We drove to the bend to feel small.</p>
-                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
-                    Work got better when we did it.
-                  </p>
-                </div>
-              </motion.div>
+                {circleCaption && (
+                  <TitleTag
+                    title={circleCaption.title}
+                    meta={circleCaption.meta}
+                    oneLiner={circleCaption.oneLiner}
+                  />
+                )}
+              </motion.figcaption>
               <div className="order-1 lg:order-2">
                 <PolaroidStack
                   title="The Circle"
@@ -302,10 +264,10 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                   onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
-            </motion.div>
+            </motion.figure>
 
             {/* Row 3: Small Joys - Stack left, text right */}
-            <motion.div
+            <motion.figure
               variants={rowVariants}
               className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
             >
@@ -318,44 +280,22 @@ export default function AlternatingPolaroidSection({ onPostCreditOpen = () => {}
                   onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
-              <motion.div
+              <motion.figcaption
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-1 lg:order-2"
+                className="order-1 lg:order-2 self-center"
               >
-                <h2
-                  className="text-4xl md:text-5xl font-bold mb-3"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  Small Joys
-                </h2>
-                <p
-                  className="text-xs tracking-[0.15em] mb-8 font-mono"
-                  style={{ color: '#F4F2EE', opacity: 0.7 }}
-                >
-                  home is people
-                </p>
-                <div
-                  className="space-y-6 text-lg leading-relaxed"
-                  style={{
-                    fontFamily: "'Playfair Display', Georgia, serif",
-                    color: '#F4F2EE'
-                  }}
-                >
-                  <p>Dad is the blueprint.</p>
-                  <p>Mom is the heartbeat.</p>
-                  <p>My sister's steel; my niece's light.</p>
-                  <p className="italic" style={{ opacity: 0.85, fontStyle: 'italic' }}>
-                    This is my why—every build is a thank-you.
-                  </p>
-                </div>
-              </motion.div>
-            </motion.div>
+                {smallJoysCaption && (
+                  <TitleTag
+                    title={smallJoysCaption.title}
+                    meta={smallJoysCaption.meta}
+                    oneLiner={smallJoysCaption.oneLiner}
+                  />
+                )}
+              </motion.figcaption>
+            </motion.figure>
 
             {/* Closing gold rule and text */}
             <motion.div
