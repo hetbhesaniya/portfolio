@@ -10,7 +10,7 @@ export default function About() {
     ];
 
     return (
-        <section id="about" className="py-20 bg-white">
+        <section id="about" className="py-20" style={{ background: 'var(--asu-ink)' }}>
             <div className="container mx-auto px-6">
                 <SectionHeader title="About Me" />
 

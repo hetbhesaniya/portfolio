@@ -44,7 +44,7 @@ export default function Experience() {
                     borderColor: 'var(--asu-border)'
                   }}
                 >
-                  <div className="p-5 flex items-center gap-6">
+                  <div className="p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
                     {/* Icon */}
                     <div
                       className="w-14 h-14 flex items-center justify-center flex-shrink-0"
@@ -95,8 +95,8 @@ export default function Experience() {
                           key={skillIndex}
                           className="px-3 py-1.5 text-xs font-medium rounded-full transition-all"
                           style={{
-                            backgroundColor: 'rgba(140, 29, 64, 0.12)',
-                            color: 'rgba(140, 29, 64, 1)',
+                            backgroundColor: 'var(--skill-badge-bg)',
+                            color: 'var(--skill-badge-text)',
                             border: 'none'
                           }}
                         >
@@ -119,7 +119,7 @@ export default function Experience() {
 
                     {/* Arrow */}
                     <ChevronRight
-                      className="w-6 h-6 transition-colors flex-shrink-0"
+                      className="w-6 h-6 transition-colors flex-shrink-0 hidden sm:block"
                       style={{
                         color: 'var(--asu-text-muted)'
                       }}
@@ -253,8 +253,8 @@ export default function Experience() {
                       key={skillIndex}
                       className="px-3 py-1.5 text-xs font-medium rounded-full transition-all"
                       style={{
-                        backgroundColor: 'rgba(140, 29, 64, 0.12)',
-                        color: 'rgba(140, 29, 64, 1)',
+                        backgroundColor: 'var(--skill-badge-bg)',
+                        color: 'var(--skill-badge-text)',
                         border: 'none'
                       }}
                     >

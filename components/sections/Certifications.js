@@ -11,7 +11,7 @@ export default function Certifications() {
 
   if (loading || !certifications.length) {
     return (
-      <section id="certifications" className="py-20 bg-white">
+      <section id="certifications" className="py-20" style={{ background: 'var(--asu-ink)' }}>
         <div className="container mx-auto px-6 text-center">
           <p style={{ color: 'var(--asu-text-muted)' }}>Loading certifications...</p>
         </div>

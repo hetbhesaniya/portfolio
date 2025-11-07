@@ -19,7 +19,7 @@ export default function Skills() {
     ];
 
     return (
-        <section id="skills" className="py-20 bg-white">
+        <section id="skills" className="py-20" style={{ background: 'var(--asu-ink)' }}>
             <div className="container mx-auto px-6">
                 <SectionHeader 
                     title="Technical Skills" 

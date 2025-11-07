@@ -140,7 +140,7 @@ export default function AboutMe() {
                         transition={{ duration: 1.5, delay: 0.5 }}
                         className="mb-8"
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight" style={{ 
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight px-4" style={{ 
                             fontFamily: "'Playfair Display', Georgia, serif",
                             textShadow: "0 0 30px rgba(255,255,255,0.3), 2px 2px 8px rgba(0,0,0,0.8)"
                         }}>
@@ -198,7 +198,7 @@ export default function AboutMe() {
                         <div className="relative border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-2">
                             <div className="relative aspect-[16/9] overflow-hidden">
                                 <Image
-                                    src="/photos/childhood.jpeg"
+                                    src="/photos/Childhood.jpeg"
                                     alt="Childhood"
                                     fill
                                     className="object-cover grayscale"
@@ -414,11 +414,9 @@ export default function AboutMe() {
 
             {/* SCENE 7 — Outro (Emotional Close) */}
             <section 
-                className="min-h-screen flex items-center justify-center py-20 relative" 
+                className="min-h-screen flex items-center justify-center py-20 relative px-4 sm:px-6 md:px-10" 
                 style={{ 
                     background: "#fafafa", 
-                    paddingLeft: "40px", 
-                    paddingRight: "40px",
                     overflow: "visible"
                 }}
             >
@@ -438,8 +436,7 @@ export default function AboutMe() {
                     }}
                 >
                     <motion.div 
-                        className="w-full text-center" 
-                        style={{ padding: "0 40px" }}
+                        className="w-full text-center px-4 sm:px-6 md:px-10" 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 0.3 }}

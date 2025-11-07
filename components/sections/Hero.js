@@ -152,7 +152,7 @@ export default function Hero() {
                         <h2 className="text-2xl md:text-3xl font-light mb-4 tracking-widest uppercase" style={{ color: 'var(--hero-accent)' }}>
                             Software Engineer & Data Analyst
                         </h2>
-                        <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#444' }}>
+                        <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--asu-text-muted)' }}>
                             Building reliable systems, scalable pipelines, and intelligent solutions
                         </p>
                     </motion.div>

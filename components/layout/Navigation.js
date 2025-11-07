@@ -211,7 +211,7 @@ export default function Navigation() {
                     {/* Left: Name */}
                     <motion.div 
                         whileHover={{ scale: 1.02 }}
-                        className="text-2xl font-bold cursor-pointer asu-brand"
+                        className="text-lg sm:text-xl md:text-2xl font-bold cursor-pointer asu-brand truncate"
                         onClick={() => scrollToSection("#home")}
                         style={{ color: 'var(--asu-text)' }}
                     >
@@ -283,7 +283,7 @@ export default function Navigation() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         className="md:hidden mt-4 pb-4 border-t"
-                        style={{ borderColor: 'rgba(0,0,0,0.06)' }}
+                        style={{ borderColor: 'var(--asu-border)' }}
                     >
                         {navItems.map((item) => (
                             <motion.button

@@ -93,7 +93,7 @@ export default function Contact() {
     ];
 
     return (
-        <section id="contact" className="py-20 bg-white">
+        <section id="contact" className="py-20" style={{ background: 'var(--asu-ink)' }}>
             <div className="container mx-auto px-6">
                 <SectionHeader 
                     title="Lets Connect" 
@@ -181,7 +181,7 @@ export default function Contact() {
                                     onChange={(e) => handleInputChange('name', e.target.value)}
                                     required
                                     className="rounded-sm"
-                                    style={{ background: '#f9fafb', borderColor: '#e5e7eb', color: '#111111' }}
+                                    style={{ background: 'var(--asu-sand)', borderColor: 'var(--asu-border)', color: 'var(--asu-text)' }}
                                 />
                             </div>
                             
@@ -193,7 +193,7 @@ export default function Contact() {
                                     onChange={(e) => handleInputChange('email', e.target.value)}
                                     required
                                     className="rounded-sm"
-                                    style={{ background: '#f9fafb', borderColor: '#e5e7eb', color: '#111111' }}
+                                    style={{ background: 'var(--asu-sand)', borderColor: 'var(--asu-border)', color: 'var(--asu-text)' }}
                                 />
                             </div>
                             
@@ -205,7 +205,7 @@ export default function Contact() {
                                     required
                                     rows={6}
                                     className="resize-none rounded-sm"
-                                    style={{ background: '#f9fafb', borderColor: '#e5e7eb', color: '#111111' }}
+                                    style={{ background: 'var(--asu-sand)', borderColor: 'var(--asu-border)', color: 'var(--asu-text)' }}
                                 />
                             </div>
                             
