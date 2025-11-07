@@ -89,15 +89,15 @@ export default function Experience() {
                     </div>
 
                     {/* Skills */}
-                    <div className="hidden lg:flex flex-wrap gap-2 max-w-xs">
+                    <div className="hidden lg:flex flex-wrap items-center gap-2 max-w-xs">
                       {job.skills.slice(0, 4).map((skill, skillIndex) => (
                         <Badge
                           key={skillIndex}
-                          className="px-2 py-1 text-xs"
+                          className="px-3 py-1.5 text-xs font-medium rounded-full transition-all"
                           style={{
-                            backgroundColor: 'var(--accent-bg-soft)',
-                            color: 'var(--accent-color)',
-                            border: '1px solid var(--accent-border-soft)'
+                            backgroundColor: 'rgba(140, 29, 64, 0.12)',
+                            color: 'rgba(140, 29, 64, 1)',
+                            border: 'none'
                           }}
                         >
                           {skill}
@@ -105,7 +105,7 @@ export default function Experience() {
                       ))}
                       {job.skills.length > 4 && (
                         <Badge
-                          className="px-2 py-1 text-xs"
+                          className="px-3 py-1.5 text-xs font-medium rounded-full"
                           style={{
                             backgroundColor: 'var(--asu-ink)',
                             color: 'var(--asu-text-muted)',
@@ -251,10 +251,11 @@ export default function Experience() {
                   {selectedExperience.skills.map((skill, skillIndex) => (
                     <Badge
                       key={skillIndex}
-                      className="px-3 py-1 text-sm"
+                      className="px-3 py-1.5 text-xs font-medium rounded-full transition-all"
                       style={{
-                        backgroundColor: 'var(--accent-color)',
-                        color: 'white'
+                        backgroundColor: 'rgba(140, 29, 64, 0.12)',
+                        color: 'rgba(140, 29, 64, 1)',
+                        border: 'none'
                       }}
                     >
                       {skill}

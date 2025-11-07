@@ -28,12 +28,18 @@
     "duration": "Jun 2024 – Dec 2024",
     "logo": "/logos/glassia.png",
     "description": [
-      "Engineered multilingual RESTful APIs supporting 10+ languages, reducing latency by 30%.",
-      "Developed scalable backend services with Node.js, Flask, and Spring Boot.",
-      "Deployed containerized applications with Docker on AWS EC2.",
-      "Set up CI/CD pipelines using GitHub Actions for faster and reliable releases."
+      "Partnered with the cofounder to turn pitch ideas into technical milestones and acceptance criteria, keeping a lightweight roadmap in Notion",
+      "Scaffolded a modular backend in Node.js and Flask with environment configs, OpenAPI docs, health checks, and structured logging",
+      "Built demo-grade services: JWT sign-in, basic role checks, and CRUD endpoints for leads and sessions; added Jest/Supertest unit tests",
+      "Containerized the stack with Docker and docker-compose; stood up a staging instance on AWS EC2 and wired GitHub Actions for lint, test, and build",
+      "Created a Postman collection and simple SDK snippets so non-engineers could run and demo flows reliably",
+      "Co-built investor pitch decks and recorded short screenflows that showcased API scenarios and multilingual copy switching"
     ],
-    "skills": ["Node.js", "Flask", "Spring Boot", "Docker", "AWS", "CI/CD"]
+    "achievements": [
+      "Shipped a one-command demo environment that made live walkthroughs consistent and repeatable",
+      "Established a small staging pipeline with automated checks that reduced demo-blocking issues"
+    ],
+    "skills": ["Node.js", "Express", "Python", "Flask", "JWT", "Postgres or MongoDB", "Docker", "GitHub Actions", "AWS EC2", "Postman", "Notion", "Google Slides", "Zoom"]
   },
   {
     "id": 3,
@@ -43,11 +49,18 @@
     "duration": "Jan 2024 - Jun 2024",
     "logo": "/logos/nrcrew.png",
     "description": [
-      "Built e-commerce platform backend with REST APIs and MySQL.",
-      "Optimized frontend performance, reducing page load time by 35%.",
-      "Collaborated with cross-functional teams to deliver features in sprints."
+      "Contributed to a dynamic e-commerce site, shipping reusable UI components and smoothing cart/checkout flows",
+      "Translated design specs into accessible, responsive components; tightened semantics and error states",
+      "Led a performance pass that cut initial load by ~35% and reduced bundle size ~28%",
+      "Hooked UI to product/cart REST endpoints and wrote change docs; resolved 15+ defects across checkout",
+      "Coordinated with design and QA, turned feedback into actionable tickets, and kept status clear in standups",
+      "Presented progress in client check-ins (3+ sessions) and handled Q&A confidently"
     ],
-    "skills": ["REST APIs", "MySQL", "E-commerce", "Frontend Optimization", "Agile"]
+    "achievements": [
+      "~35% faster first load → smoother demos and better client feedback",
+      "Stabilized cart/checkout by closing priority bugs and documenting repeatable test steps"
+    ],
+    "skills": ["JavaScript", "HTML/CSS", "REST APIs", "MySQL", "Git & GitHub", "Postman", "Performance optimization", "Agile basics", "Client communication"]
   },
   {
     "id": 4,
@@ -57,10 +70,17 @@
     "duration": "Jul 2023 - Aug 2023",
     "logo": "/logos/techmicra.png",
     "description": [
-      "Designed and deployed regression models for client reporting.",
-      "Built analytics dashboards and interactive visualizations in Python.",
-      "Automated ETL workflows to clean and prepare large datasets."
+      "Imported and profiled datasets in Jupyter; wrote a short problem brief with goals and assumptions",
+      "Cleaned data (types, missing values, outliers) and engineered simple features: binning, indicators, scaling",
+      "Ran EDA with descriptive stats, group-bys, correlations, and a few focused visuals to guide features",
+      "Built baseline linear models and compared polynomial and ridge; chose models based on validation results",
+      "Used train/test with k-fold cross-validation; tracked R² and MSE and checked learning curves for over/underfit",
+      "Packaged the workflow into a scikit-learn pipeline; did a small grid search and documented steps for handoff"
     ],
-    "skills": ["Python", "Regression Models", "Data Visualization", "ETL", "Machine Learning"]
+    "achievements": [
+      "Delivered a reusable notebook + pipeline template that cut repeat setup by ~20%",
+      "Consistently recognized for clear communication, steady progress, and teamwork"
+    ],
+    "skills": ["Python", "Jupyter", "pandas", "NumPy", "scikit-learn (Pipeline, GridSearchCV, Linear/Ridge)", "matplotlib", "SciPy stats", "Git", "Excel"]
   }
 ]
