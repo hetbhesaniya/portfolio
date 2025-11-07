@@ -197,29 +197,50 @@ export default function Experience() {
               </div>
 
               {/* Key Achievements */}
-              <div>
-                <h4 className="text-lg font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--heading-accent)' }}>
-                  <Award className="w-5 h-5" />
-                  Key Achievements
-                </h4>
-                <div className="space-y-3">
-                  {selectedExperience.description
-                    .filter(item => item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support'))
-                    .map((item, i) => (
-                      <div
-                        key={i}
-                        className="p-3 rounded-lg flex items-start gap-3"
-                        style={{
-                          background: 'var(--accent-bg-soft)',
-                          border: '1px solid var(--accent-border-soft)'
-                        }}
-                      >
-                        <span className="text-xl">🎯</span>
-                        <span style={{ color: 'var(--asu-text)' }}>{item}</span>
-                      </div>
-                    ))}
+              {(selectedExperience.achievements && selectedExperience.achievements.length > 0) || 
+               (selectedExperience.description && selectedExperience.description.some(item => 
+                 item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support')
+               )) ? (
+                <div>
+                  <h4 className="text-lg font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--heading-accent)' }}>
+                    <Award className="w-5 h-5" />
+                    Key Achievements
+                  </h4>
+                  <div className="space-y-3">
+                    {selectedExperience.achievements && selectedExperience.achievements.length > 0 ? (
+                      selectedExperience.achievements.map((item, i) => (
+                        <div
+                          key={i}
+                          className="p-3 rounded-lg flex items-start gap-3"
+                          style={{
+                            background: 'var(--accent-bg-soft)',
+                            border: '1px solid var(--accent-border-soft)'
+                          }}
+                        >
+                          <span className="text-xl">🎯</span>
+                          <span style={{ color: 'var(--asu-text)' }}>{item}</span>
+                        </div>
+                      ))
+                    ) : (
+                      selectedExperience.description
+                        .filter(item => item.match(/\d+%/) || item.toLowerCase().includes('reduce') || item.toLowerCase().includes('improve') || item.toLowerCase().includes('support'))
+                        .map((item, i) => (
+                          <div
+                            key={i}
+                            className="p-3 rounded-lg flex items-start gap-3"
+                            style={{
+                              background: 'var(--accent-bg-soft)',
+                              border: '1px solid var(--accent-border-soft)'
+                            }}
+                          >
+                            <span className="text-xl">🎯</span>
+                            <span style={{ color: 'var(--asu-text)' }}>{item}</span>
+                          </div>
+                        ))
+                    )}
+                  </div>
                 </div>
-              </div>
+              ) : null}
 
               {/* Technologies */}
               <div>

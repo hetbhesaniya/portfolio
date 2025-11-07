@@ -7,12 +7,18 @@
     "duration": "Jan 2025 – Present",
     "logo": "/logos/asu.png",
     "description": [
-      "Automated editorial workflows, improving turnaround time by 40%.",
-      "Designed Python validation scripts, reducing publication errors by 90%.",
-      "Built KPI dashboards and integrated workflow tools for leadership reporting.",
-      "Streamlined data pipelines and monitoring to support 500+ active publications."
+      "Coordinate with the director, editors, and designers to keep ASU Thrive issues on schedule from copy readiness through handoff",
+      "Maintain the ASU All Access editorial source of truth, tracking assignments, statuses, and deadlines while surfacing blockers early",
+      "Review and proofread ASU Events submissions, fix metadata, verify links and dates, and publish approved entries with zero defects",
+      "Enforce ASU brand and accessibility guidelines across copy and images, providing clear feedback and quick fixes to contributors",
+      "Partner with QA to triage site issues, reproduce bugs, validate fixes, and communicate updates to stakeholders until resolution",
+      "Onboard and support event authors by creating accounts, writing quick how to notes, and answering workflow questions"
     ],
-    "skills": ["Python", "Data Analysis", "Automation", "Dashboards", "ETL"]
+    "achievements": [
+      "Recognized with a Sun Award from a colleague for reliable delivery and team support",
+      "Contributed to on time magazine releases and a steady weekly publishing cadence across the ASU Events site"
+    ],
+    "skills": ["Google Docs", "Outlook", "Adobe InCopy and InDesign", "Excel", "CMS workflows", "basic data queries"]
   },
   {
     "id": 2,

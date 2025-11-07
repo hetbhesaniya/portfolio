@@ -1,30 +1,48 @@
 [
   {
     "id": 1,
-    "name": "AWS Certified Cloud Practitioner",
-    "issuer": "Amazon Web Services",
-    "issue_date": "Jan 2024",
-    "credential_id": "AWS-CCP-2024",
-    "credential_url": "https://www.credly.com/badges/your-badge-id",
-    "description": "Foundational AWS cloud knowledge covering core AWS services, security, and architecture."
+    "name": "AWS Academy Graduate, Data Engineering",
+    "issuer": "Amazon Web Services (AWS)",
+    "issue_date": "Sep 2025",
+    "credential_url": "https://www.credly.com/badges/88eaeca6-ce8e-43e2-9324-02e45362a193/linked_in_profile",
+    "description": "Completed AWS Academy's data engineering curriculum covering cloud data foundations and workflows.",
+    "skills": ["AWS", "data engineering basics", "pipelines", "ETL concepts", "cloud storage & querying"]
   },
   {
     "id": 2,
-    "name": "Meta Front-End Developer Certificate",
-    "issuer": "Meta (Coursera)",
-    "issue_date": "Dec 2023",
-    "credential_id": "META-FE-2023",
-    "credential_url": "https://www.coursera.org/certificates/your-cert-id",
-    "description": "Front-end development using React, HTML/CSS, JavaScript, and UI/UX principles."
+    "name": "Career Essentials in Data Analysis by Microsoft and LinkedIn",
+    "issuer": "Microsoft",
+    "issue_date": "Dec 2024",
+    "credential_url": "https://www.linkedin.com/learning/certificates/3bfea57a0e301a257f8e056f9f496e93562088ece420ad9e0b75af122661ae8c?u=70944002",
+    "description": "Career-oriented program on analytics workflows, governance, visualization, and business reporting.",
+    "skills": ["project documentation", "data visualization", "data governance", "business analytics", "regulatory reporting", "data analysis", "reporting"]
   },
   {
     "id": 3,
-    "name": "Python for Data Science",
-    "issuer": "University of Michigan (Coursera)",
-    "issue_date": "Aug 2023",
-    "credential_id": "PYTHON-DS-2023",
-    "credential_url": "https://www.coursera.org/certificates/your-cert-id",
-    "description": "Data analysis, visualization, and machine learning with Python, Pandas, and NumPy."
+    "name": "Introduction to Career Skills in Data Analytics",
+    "issuer": "LinkedIn",
+    "issue_date": "Nov 2024",
+    "credential_url": "https://www.linkedin.com/learning/certificates/0bd92cb1d65b06e69875bb7dab30134a5091af36ed6c5942d9e35f6a796a8967?u=70944002",
+    "description": "Entry pathway covering interpretation, Excel and SQL basics, and analytics career skills.",
+    "skills": ["data interpretation", "analytics", "data science fundamentals", "Microsoft Excel", "SQL"]
+  },
+  {
+    "id": 4,
+    "name": "Learning Data Analytics: 1 Foundations",
+    "issuer": "LinkedIn",
+    "issue_date": "Nov 2024",
+    "credential_url": "https://www.linkedin.com/learning/certificates/27897de7e4df4b93bd3c2b12430d9e5a7a986e776f542fb39621fe81259f205d?u=70944002",
+    "description": "Foundational training in collection, cleaning, transformation, and decision-making with data.",
+    "skills": ["data collection", "data cleaning", "data transformation", "data analysis", "reporting & analysis"]
+  },
+  {
+    "id": 5,
+    "name": "Power BI Data Visualization and Dashboard Tips, Tricks, & Techniques",
+    "issuer": "LinkedIn",
+    "issue_date": "Nov 2024",
+    "credential_url": "https://www.linkedin.com/learning/certificates/b8f770ac89e5c918b59a7907354fc11fc65d5917e68e4ddbb788be4976205951?u=70944002",
+    "description": "Practical techniques for building clear, high-signal dashboards in Power BI.",
+    "skills": ["data assessment", "data visualization", "data quality", "dashboards", "Microsoft Power BI"]
   }
 ]
 
