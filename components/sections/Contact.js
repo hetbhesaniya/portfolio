@@ -243,20 +243,14 @@ export default function Contact() {
 
                             <Button
                                 type="submit"
+                                variant="primary"
+                                size="lg"
+                                fullWidth
                                 disabled={isSubmitting}
-                                className="w-full font-semibold py-3 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 rounded-sm asu-btn-primary asu-gold-glow"
+                                loading={isSubmitting}
                             >
-                                {isSubmitting ? (
-                                    <div className="flex items-center justify-center space-x-2">
-                                        <div className="animate-spin w-4 h-4 border-2 border-black border-t-transparent rounded-full"></div>
-                                        <span>Sending...</span>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center justify-center space-x-2">
-                                        <Send size={16} />
-                                        <span>Transmit Message</span>
-                                    </div>
-                                )}
+                                <Send size={18} />
+                                <span>Transmit Message</span>
                             </Button>
                         </form>
                     </motion.div>

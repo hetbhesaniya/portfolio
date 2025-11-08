@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { User, Award, Coffee } from "lucide-react";
 import SectionHeader from "@/components/common/SectionHeader";
+import { Button } from "@/components/ui/button";
 
 export default function About() {
     const stats = [
@@ -39,15 +40,17 @@ export default function About() {
                             transition={{ duration: 0.8, delay: 0.6 }}
                             className="mt-8"
                         >
-                            <a 
-                                href="/resume.pdf" 
-                                target="_blank" 
+                            <Button
+                                as="a"
+                                href="/resume.pdf"
+                                target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-block px-8 py-3 rounded-md font-semibold transition-all duration-300 asu-btn-primary asu-gold-glow"
+                                variant="primary"
+                                size="lg"
+                                className="shadow-lg hover:shadow-xl"
                             >
                                 Resume
-                            </a>
-
+                            </Button>
                         </motion.div>
                     </motion.div>
 

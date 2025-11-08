@@ -28,6 +28,7 @@ export default function Navigation() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("home");
+    const [isMobile, setIsMobile] = useState(false);
     const isNavigatingRef = useRef(false);
     const pitchforkPressTimer = useRef(null);
 
@@ -42,12 +43,21 @@ export default function Navigation() {
     ], []);
 
     useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
         const handleScroll = throttle(() => {
             setIsScrolled(window.scrollY > 50);
         }, 100);
         
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        
+        return () => {
+            window.removeEventListener('resize', checkMobile);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const handlePitchforkPressStart = () => {
@@ -200,10 +210,15 @@ export default function Navigation() {
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b backdrop-blur`}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 border-b ${!isScrolled && !isMobile ? 'backdrop-blur-sm' : ''}`}
             style={{
-                background: isScrolled ? 'var(--asu-ink)' : 'transparent',
-                borderColor: theme === 'asu-dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)'
+                background: isScrolled 
+                    ? 'var(--asu-ink)' 
+                    : isMobile 
+                        ? 'var(--asu-ink)' 
+                        : 'transparent',
+                borderColor: theme === 'asu-dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',
+                paddingTop: 'max(env(safe-area-inset-top), 0px)'
             }}
         >
             <div className="container mx-auto px-6 py-4">

@@ -4,6 +4,7 @@ import { Award, ExternalLink, Calendar, Building2, ChevronDown, ChevronUp } from
 import { useDataFetch } from "@/hooks/useDataFetch";
 import SectionHeader from "@/components/common/SectionHeader";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export default function Certifications() {
   const { data: certifications, loading } = useDataFetch("/Data/certifications.json");
@@ -133,16 +134,10 @@ export default function Certifications() {
 
         {remainingCerts.length > 0 && (
           <div className="flex justify-center mt-8">
-            <motion.button
+            <Button
               onClick={() => setShowAll(!showAll)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 px-6 py-3 rounded-md font-semibold transition-all duration-300"
-              style={{
-                background: showAll ? 'var(--asu-ink)' : 'var(--accent-bg-soft)',
-                color: showAll ? 'var(--asu-text)' : 'var(--accent-color)',
-                border: `1px solid ${showAll ? 'var(--asu-border)' : 'var(--accent-border-soft)'}`
-              }}
+              variant={showAll ? "outline" : "secondary"}
+              size="md"
             >
               {showAll ? (
                 <>
@@ -155,7 +150,7 @@ export default function Certifications() {
                   <span>See More</span>
                 </>
               )}
-            </motion.button>
+            </Button>
           </div>
         )}
       </div>

@@ -1,61 +1,131 @@
 import { motion } from "framer-motion";
-import { CheckCircle } from "lucide-react";
+import { Code2, Database, Cloud, Wrench, Sparkles, Server } from "lucide-react";
 import SectionHeader from "@/components/common/SectionHeader";
 
 export default function Skills() {
     const skillCategories = [
         {
             title: "Frontend",
-            skills: ["React", "TypeScript", "Next.js", "Tailwind CSS", "Vue.js", "Framer Motion", "HTML5 & CSS3"]
+            icon: Code2,
+            skills: ["JavaScript", "TypeScript", "React", "HTML/CSS", "Chrome Extension", "Next.js", "Tailwind CSS"]
         },
         {
             title: "Backend",
-            skills: ["Node.js", "Python", "Express.js", "PostgreSQL", "MongoDB", "GraphQL", "REST APIs"]
+            icon: Server,
+            skills: ["Node.js", "Python", "Express.js", "Flask", "Spring Boot", "REST APIs", "JWT"]
         },
         {
-            title: "Tools & Deploy",
-            skills: ["Git", "Docker", "AWS", "Vercel", "Figma", "Jest", "CI/CD"]
+            title: "Data & Analytics",
+            icon: Sparkles,
+            skills: ["Python", "Jupyter", "pandas", "NumPy", "scikit-learn", "matplotlib", "SciPy", "YOLOv11", "Regression", "Tableau"]
+        },
+        {
+            title: "Databases",
+            icon: Database,
+            skills: ["MySQL", "PostgreSQL", "MongoDB", "AWS S3"]
+        },
+        {
+            title: "Cloud & DevOps",
+            icon: Cloud,
+            skills: ["AWS (EC2, S3)", "Docker", "GitHub Actions", "Git", "CI/CD"]
+        },
+        {
+            title: "Tools & Others",
+            icon: Wrench,
+            skills: ["Postman", "Notion", "CMS Workflows", "Excel", "Adobe InDesign", "Agile"]
         }
     ];
 
     return (
         <section id="skills" className="py-20" style={{ background: 'var(--asu-ink)' }}>
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 max-w-7xl">
                 <SectionHeader 
                     title="Technical Skills" 
                     subtitle="The technologies and tools I wield to execute my missions." 
                 />
 
-                <div className="space-y-12">
-                    {skillCategories.map((category, categoryIndex) => (
-                        <motion.div
-                            key={category.title}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
-                        >
-                            <h3 className="text-2xl font-bold mb-8 text-center tracking-widest uppercase" style={{ color: 'var(--heading-accent)' }}>
-                                {category.title}
-                            </h3>
-                            
-                            <div className="flex flex-wrap justify-center gap-4">
-                                {category.skills.map((skill, skillIndex) => (
-                                    <motion.div
-                                        key={skill}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        whileHover={{ y: -5, scale: 1.05, boxShadow: "0 0 18px rgba(255, 198, 39, 0.25)" }}
-                                        transition={{ duration: 0.3, delay: (categoryIndex * 0.2) + (skillIndex * 0.05) }}
-                                    className="p-4 rounded-md border flex items-center gap-3 cursor-default"
-                                    style={{ background: 'var(--asu-ink)', borderColor: 'var(--asu-border)' }}
-                                    >
-                                        <CheckCircle className="w-5 h-5" style={{ color: 'var(--accent-color)' }}/>
-                                        <span className="font-medium text-lg" style={{ color: 'var(--asu-text)' }}>{skill}</span>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </motion.div>
-                    ))}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+                    {skillCategories.map((category, categoryIndex) => {
+                        const IconComponent = category.icon;
+                        return (
+                            <motion.div
+                                key={category.title}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+                                className="group"
+                            >
+                                <div
+                                    className="h-full p-6 rounded-lg border transition-all duration-300"
+                                    style={{ 
+                                        background: 'var(--asu-ink)', 
+                                        borderColor: 'var(--asu-border)',
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.borderColor = 'var(--accent-color)';
+                                        e.currentTarget.style.boxShadow = '0 8px 24px rgba(255, 198, 39, 0.15)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.borderColor = 'var(--asu-border)';
+                                        e.currentTarget.style.boxShadow = 'none';
+                                    }}
+                                >
+                                    {/* Category Header */}
+                                    <div className="flex items-center gap-3 mb-5">
+                                        <div 
+                                            className="p-2.5 rounded-lg flex-shrink-0"
+                                            style={{ 
+                                                background: 'var(--accent-bg-soft)',
+                                                border: '1px solid var(--accent-border-soft)'
+                                            }}
+                                        >
+                                            <IconComponent className="w-5 h-5" style={{ color: 'var(--accent-color)' }} />
+                                        </div>
+                                        <h3 
+                                            className="text-xl font-bold uppercase tracking-wide"
+                                            style={{ color: 'var(--heading-accent)' }}
+                                        >
+                                            {category.title}
+                                        </h3>
+                                    </div>
+                                    
+                                    {/* Skills Tags */}
+                                    <div className="flex flex-wrap gap-2.5">
+                                        {category.skills.map((skill, skillIndex) => (
+                                            <motion.span
+                                                key={skill}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                whileHover={{ scale: 1.05, y: -2 }}
+                                                transition={{ 
+                                                    duration: 0.2, 
+                                                    delay: (categoryIndex * 0.1) + (skillIndex * 0.02) 
+                                                }}
+                                                className="px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-200 cursor-default"
+                                                style={{
+                                                    background: 'var(--skill-badge-bg)',
+                                                    color: 'var(--skill-badge-text)',
+                                                    border: '1px solid transparent'
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.borderColor = 'var(--accent-border-soft)';
+                                                    e.currentTarget.style.transform = 'translateY(-2px)';
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.borderColor = 'transparent';
+                                                    e.currentTarget.style.transform = 'translateY(0)';
+                                                }}
+                                            >
+                                                {skill}
+                                            </motion.span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
         </section>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useTheme } from "@/components/layout/ThemeProvider";
 import { throttle } from "@/utils/scroll";
+import { Button } from "@/components/ui/button";
 
 export default function Hero() {
     const heroRef = useRef(null);
@@ -45,16 +46,24 @@ export default function Hero() {
     };
 
     return (
-        <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden asu-white-maroon-bg">
-
+        <section 
+            ref={heroRef} 
+            id="home" 
+            className="min-h-screen flex items-center justify-center relative overflow-hidden asu-white-maroon-bg"
+            style={{ 
+                paddingTop: 'calc(80px + env(safe-area-inset-top))', 
+                zIndex: 1,
+                minHeight: 'calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom))'
+            }}
+        >
             {/* Parallax Background */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0" style={{ zIndex: 0 }}>
                 <div className="parallax-bg absolute -inset-10 transition-transform duration-300 ease-out">
                     <div className="absolute inset-0 bg-repeat bg-center [background-image:radial-gradient(rgba(140,29,64,0.06)_1px,transparent_1px)] [background-size:2rem_2rem]"></div>
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto px-6 relative" style={{ zIndex: 10 }}>
                 {/* Responsive grid: centered layout (desktop side-by-side) */}
                 <div className="text-center md:text-center md:grid md:grid-cols-2 md:items-center md:justify-items-center md:gap-12">
                 {/* Desktop image column (right, centered) */}
@@ -71,8 +80,12 @@ export default function Hero() {
                             alt="Het Bhesaniya"
                             width={480}
                             height={480}
+                            quality={95}
                             priority
                             className="w-[480px] h-[480px] object-cover"
+                            style={{
+                                imageRendering: 'high-quality'
+                            }}
                         />
                     </motion.div>
                     {/* ASU Grad 2025 Logo - Theme Aware */}
@@ -87,7 +100,9 @@ export default function Hero() {
                             alt="ASU Grad 2025"
                             width={220}
                             height={66}
+                            quality={90}
                             className="h-auto"
+                            priority
                         />
                     </motion.div>
                 </div>
@@ -104,16 +119,26 @@ export default function Hero() {
                             initial={{ opacity: 0, scale: 0.95, y: 20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.4 }}
-                            className="rounded-full shadow-xl border-4 overflow-hidden w-56 sm:w-64 aspect-square mb-4"
-                            style={{ borderColor: 'var(--profile-border-color)' }}
+                            className="rounded-full shadow-xl border-4 overflow-hidden w-56 sm:w-64 max-w-[280px] aspect-square mb-4 relative"
+                            style={{ 
+                                borderColor: 'var(--profile-border-color)',
+                                zIndex: 10
+                            }}
                         >
                             <Image
                                 src="/Profile.jpg"
                                 alt="Het Bhesaniya"
-                                width={256}
-                                height={256}
+                                width={512}
+                                height={512}
+                                quality={95}
                                 className="w-full h-full object-cover"
                                 priority
+                                sizes="(max-width: 640px) 224px, (max-width: 768px) 256px, 280px"
+                                style={{
+                                    imageRendering: 'high-quality',
+                                    WebkitBackfaceVisibility: 'hidden',
+                                    backfaceVisibility: 'hidden'
+                                }}
                             />
                         </motion.div>
                         {/* ASU Grad 2025 Logo - Mobile - Theme Aware */}
@@ -123,13 +148,16 @@ export default function Hero() {
                             transition={{ duration: 0.8, delay: 0.6 }}
                             className="flex justify-center"
                         >
-                            <Image
-                                src={theme === 'asu-dark' ? '/asu-grad-2025-dark.png' : '/asu-grad-2025.png'}
-                                alt="ASU Grad 2025"
-                                width={200}
-                                height={60}
-                                className="h-auto"
-                            />
+                        <Image
+                            src={theme === 'asu-dark' ? '/asu-grad-2025-dark.png' : '/asu-grad-2025.png'}
+                            alt="ASU Grad 2025"
+                            width={200}
+                            height={60}
+                            quality={90}
+                            className="h-auto"
+                            priority
+                            sizes="(max-width: 640px) 180px, 200px"
+                        />
                         </motion.div>
                     </div>
                     <motion.div
@@ -193,17 +221,21 @@ export default function Hero() {
                         </motion.a>
                     </motion.div>
 
-                    <motion.button
+                    <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 1.4 }}
-                        whileHover={{ scale: 1.05, boxShadow: "0 0 24px rgba(255, 198, 39, 0.35)" }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={scrollToNext}
-                        className="px-8 py-3 rounded-md font-semibold transition-all duration-300 hero-btn mb-8"
+                        className="mb-8"
                     >
-                        Explore My Skills
-                    </motion.button>
+                        <Button
+                            variant="primary"
+                            size="lg"
+                            onClick={scrollToNext}
+                            className="shadow-lg hover:shadow-xl"
+                        >
+                            Explore My Skills
+                        </Button>
+                    </motion.div>
                 </motion.div>
                 </div>
             </div>

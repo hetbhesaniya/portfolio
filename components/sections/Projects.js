@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ExternalLink, Github, Eye, Code2 } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import SectionHeader from "@/components/common/SectionHeader";
 
@@ -152,31 +153,30 @@ export default function Projects() {
                 </h4>
                 <div className="flex flex-wrap gap-3">
                   {selectedProject.demo_url && (
-                    <a
+                    <Button
+                      as="a"
                       href={selectedProject.demo_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-md font-semibold transition-all duration-300 flex items-center gap-2 asu-btn-primary"
+                      variant="primary"
+                      size="md"
                     >
                       <Eye size={18} />
                       <span>View Live</span>
-                    </a>
+                    </Button>
                   )}
                   {selectedProject.github_url && (
-                    <a
+                    <Button
+                      as="a"
                       href={selectedProject.github_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-2 rounded-md font-semibold transition-all duration-300 flex items-center gap-2"
-                      style={{
-                        background: 'var(--accent-bg-soft)',
-                        color: 'var(--accent-color)',
-                        border: '1px solid var(--accent-border-soft)'
-                      }}
+                      variant="secondary"
+                      size="md"
                     >
                       <Github size={18} />
                       <span>Source Code</span>
-                    </a>
+                    </Button>
                   )}
                 </div>
               </div>
