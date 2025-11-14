@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
@@ -8,46 +8,12 @@ import { throttle } from "@/utils/scroll";
 import AlternatingPolaroidSection from "@/components/polaroids/AlternatingPolaroidSection";
 import CraftCareLetterbox from "@/components/sections/CraftCareLetterbox";
 
-function TypewriterText({ lines, speed = 35, className = "", style = {} }) {
-    const full = useMemo(() => lines.join("\n\n"), [lines]);
-
-    const defaultStyle = {
-        fontFamily: "'Playfair Display', Georgia, serif",
-        color: "#f4f2ee"
-    };
-
-    const mergedStyle = {
-        ...defaultStyle,
-        ...style,
-        margin: 0,
-        padding: 0,
-        display: 'block',
-        width: '100%',
-        textAlign: style.textAlign || 'center'
-    };
+function TypewriterText({ lines, className = "", style = {} }) {
+    const content = useMemo(() => lines.join("\n\n"), [lines]);
 
     return (
-        <div className={className} style={mergedStyle}>
-            <div style={{ 
-                display: 'inline-block',
-                textAlign: 'left',
-                maxWidth: '100%',
-                padding: '0 20px'
-            }}>
-                <pre style={{ 
-                    margin: 0,
-                    padding: 0,
-                    fontFamily: mergedStyle.fontFamily,
-                    color: mergedStyle.color,
-                    fontWeight: mergedStyle.fontWeight,
-                    whiteSpace: 'pre-wrap',
-                    wordWrap: 'break-word',
-                    display: 'inline-block',
-                    textAlign: 'center'
-                }}>
-                    {full}
-                </pre>
-            </div>
+        <div className={className} style={{ ...style, whiteSpace: "pre-wrap" }}>
+            {content}
         </div>
     );
 }
@@ -57,6 +23,14 @@ export default function AboutMe() {
     const paperRef = useRef(null);
     const photoRef = useRef(null);
     const textRef = useRef(null);
+    const prefersReducedMotion = useReducedMotion();
+    const [heroHasScrolled, setHeroHasScrolled] = useState(false);
+    const titleFullText = "This is where it all began.";
+    const [titleCharCount, setTitleCharCount] = useState(prefersReducedMotion ? titleFullText.length : 0);
+    const titleText = titleFullText.slice(0, titleCharCount);
+    const titleDone = titleCharCount >= titleFullText.length;
+    const heroHasScrolledRef = useRef(false);
+    const { scrollYProgress, scrollY } = useScroll();
 
     useEffect(() => {
         const handleScroll = throttle(() => {
@@ -82,6 +56,68 @@ export default function AboutMe() {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        if (latest > 40 && !heroHasScrolledRef.current) {
+            heroHasScrolledRef.current = true;
+            setHeroHasScrolled(true);
+        }
+    });
+
+    useEffect(() => {
+        if (prefersReducedMotion || typeof window === "undefined") {
+            setTitleCharCount(titleFullText.length);
+            return;
+        }
+
+        setTitleCharCount(0);
+        let index = 0;
+        let timer = window.setTimeout(function tick() {
+            index += 1;
+            setTitleCharCount(index);
+            if (index < titleFullText.length) {
+                timer = window.setTimeout(tick, 70);
+            }
+        }, 400);
+
+        return () => {
+            window.clearTimeout(timer);
+        };
+    }, [prefersReducedMotion, titleFullText.length]);
+
+    const introLines = [
+        "I'm Het — born in 2002, somewhere between floppy disks and cloud storage.",
+        "I build things. I listen. I care deeply. And I overthink just enough to make them better.",
+        "This is where my story begins."
+    ];
+
+    const lineVariants = {
+        hidden: {
+            opacity: 0,
+            y: prefersReducedMotion ? 0 : 16
+        },
+        visible: (index) => ({
+            opacity: 1,
+            y: 0,
+            transition: {
+                delay: index * 0.14 + 0.3,
+                duration: 0.7,
+                ease: "easeOut"
+            }
+        })
+    };
+
+    const titleVariants = {
+        hidden: {
+            opacity: prefersReducedMotion ? 1 : 0.75,
+            filter: prefersReducedMotion ? "blur(0px)" : "blur(2px)"
+        },
+        visible: {
+            opacity: 1,
+            filter: "blur(0px)",
+            transition: { duration: 0.8, ease: "easeOut" }
+        }
+    };
 
     return (
         <div className="min-h-screen relative overflow-x-hidden" style={{ background: "#000" }}>
@@ -110,7 +146,7 @@ export default function AboutMe() {
             </div>
 
             {/* SCENE 1 — The Frame (Intro) */}
-            <section className="min-h-screen flex items-center justify-center px-6 relative" style={{ background: "#000" }}>
+            <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden" style={{ background: "#000" }}>
                 {/* Background ripped paper image */}
                 <div className="absolute inset-0 z-0" ref={paperRef} style={{ WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)', maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' }}>
                     <Image
@@ -127,46 +163,136 @@ export default function AboutMe() {
                 <div className="absolute inset-0 pointer-events-none z-0" style={{
                     background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)"
                 }} />
-                
+
+                {/* Content */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ duration: 2 }}
+                    transition={{ duration: 1.6 }}
                     className="max-w-4xl mx-auto text-center relative z-10"
                 >
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 14 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.5, delay: 0.5 }}
-                        className="mb-8"
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="mb-6"
                     >
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 tracking-tight px-4" style={{ 
-                            fontFamily: "'Playfair Display', Georgia, serif",
-                            textShadow: "0 0 30px rgba(255,255,255,0.3), 2px 2px 8px rgba(0,0,0,0.8)"
-                        }}>
-                            This is where it all began.
-                        </h1>
+                        <span className="sr-only">Chapter 00 — Prologue</span>
+                        <p
+                            className="text-[0.7rem] tracking-[0.4em] uppercase"
+                            style={{ color: "rgba(244,242,238,0.7)" }}
+                        >
+                            CHAPTER 00 <span style={{ color: "#E9C46A" }}>•</span> PROLOGUE
+                        </p>
                     </motion.div>
 
-                    <TypewriterText
-                        speed={40}
-                        lines={[
-                            "I'm Het — born in 2002, somewhere between floppy disks and cloud storage.",
-                            "I build things. I listen. I care deeply. And I overthink just enough to make them better.",
-                            "This is where my story begins."
-                        ]}
-                        className="text-center text-xl md:text-2xl tracking-tight leading-relaxed"
-                    />
+                    <motion.h1
+                        id="about-hero-heading"
+                        variants={titleVariants}
+                        initial="hidden"
+                        animate="visible"
+                        className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight px-4 relative"
+                        style={{
+                            fontFamily: "'Playfair Display', Georgia, serif",
+                            color: "#F4F2EE",
+                            textShadow: "0 0 30px rgba(255,255,255,0.25)"
+                        }}
+                    >
+                        {titleText}
+                        {titleCharCount < titleFullText.length && !prefersReducedMotion && (
+                            <span className="inline-block w-2 h-8 bg-[#F4F2EE] ml-1 align-middle animate-pulse" aria-hidden="true" />
+                        )}
+                        {!prefersReducedMotion && (
+                            <motion.span
+                                initial={{ opacity: 0, x: "-120%" }}
+                                animate={{ opacity: [0, 0.08, 0], x: "160%" }}
+                                transition={{ duration: 1, delay: 1.2, ease: "easeInOut" }}
+                                className="absolute inset-y-0 w-1/3"
+                                style={{
+                                    background: "linear-gradient(135deg, transparent, rgba(233,196,106,0.5), transparent)",
+                                    mixBlendMode: "screen"
+                                }}
+                                aria-hidden="true"
+                            />
+                        )}
+                    </motion.h1>
 
-                    {/* Subtle divider + micro copy */}
-                    <div className="mx-auto mt-6 mb-2" style={{ width: '180px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(244,242,238,0.7), transparent)' }} />
-                    <div className="text-sm italic lowercase" style={{ color: 'rgba(244,242,238,0.7)' }}>
-                        scroll down — it gets personal.
+                    <div className="space-y-5 mb-10">
+                        {introLines.map((line, index) => (
+                            <motion.p
+                                key={line}
+                                custom={index}
+                                variants={lineVariants}
+                                initial="hidden"
+                                animate={titleDone ? "visible" : "hidden"}
+                                className={`text-lg sm:text-xl md:text-2xl leading-relaxed ${index === introLines.length - 1 ? "italic" : ""}`}
+                                style={{ color: "#F4F2EE" }}
+                            >
+                                {line}
+                            </motion.p>
+                        ))}
                     </div>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={!titleDone || heroHasScrolled ? { opacity: 0 } : { opacity: 1 }}
+                        transition={{ duration: 0.5 }}
+                        className="flex flex-col items-center space-y-2"
+                        aria-live="polite"
+                    >
+                        <div
+                            style={{
+                                width: "160px",
+                                height: "1px",
+                                background: "linear-gradient(90deg, transparent, rgba(244,242,238,0.65), transparent)"
+                            }}
+                            aria-hidden="true"
+                        />
+                        <p className="text-sm italic lowercase" style={{ color: "rgba(244,242,238,0.75)" }}>
+                            scroll down — it gets personal.
+                        </p>
+                        <motion.div
+                            className="text-xs"
+                            style={{ color: "rgba(244,242,238,0.55)" }}
+                            animate={
+                                heroHasScrolled || !titleDone || prefersReducedMotion
+                                    ? { opacity: 0 }
+                                    : { y: [0, -6, 0], opacity: 1 }
+                            }
+                            transition={{ duration: 2, repeat: prefersReducedMotion ? 0 : Infinity, ease: "easeInOut" }}
+                            aria-hidden="true"
+                        >
+                            ↓
+                        </motion.div>
+                    </motion.div>
+
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 0.6 }}
+                        transition={{ duration: 1.2, delay: 1.5 }}
+                        className="mt-12 text-[11px] tracking-[0.4em] uppercase"
+                        style={{ color: "rgba(244,242,238,0.4)" }}
+                    >
+                        written & built by het bhesaniya
+                    </motion.p>
                 </motion.div>
 
-                {/* Bottom gradient to blend into Scene 2 (pure black to avoid grey band) */}
-                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40" style={{ zIndex: 1, background: 'linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000000 100%)' }} />
+                {/* Runtime progress */}
+                <div
+                    className="fixed bottom-0 left-0 right-0 pointer-events-none z-30"
+                    aria-hidden="true"
+                >
+                    <div style={{ height: "2px", background: "rgba(233,196,106,0.25)" }}>
+                        <motion.div
+                            style={{
+                                height: "100%",
+                                background: "#E9C46A",
+                                transformOrigin: "left center",
+                                scaleX: scrollYProgress
+                            }}
+                        />
+                    </div>
+                </div>
             </section>
 
             {/* SCENE 2 — Roots (Childhood & Family) */}

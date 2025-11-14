@@ -340,7 +340,7 @@ export default function Navigation() {
                                 repeat: Infinity,
                                 repeatDelay: 28
                             }}
-                            className="p-3 rounded-md border"
+                            className="p-3 rounded-full border"
                             style={{
                                 borderColor: theme === 'asu-dark' ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',
                                 color: theme === 'asu-dark' ? 'var(--asu-gold)' : 'var(--asu-maroon)',
@@ -349,11 +349,12 @@ export default function Navigation() {
                                 touchAction: 'manipulation',
                                 userSelect: 'none',
                                 WebkitUserSelect: 'none',
-                                minWidth: '44px',
-                                minHeight: '44px',
+                                width: '48px',
+                                height: '48px',
                                 display: 'flex',
                                 alignItems: 'center',
-                                justifyContent: 'center'
+                                justifyContent: 'center',
+                                borderRadius: '50%'
                             }}
                         >
                             <PitchforkIcon size={24} />
