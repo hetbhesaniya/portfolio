@@ -22,8 +22,6 @@ export default function CraftCareLetterbox() {
   const tabRefs = useRef({ Craft: null, People: null });
 
   useEffect(() => {
-    console.info("CraftCareLetterbox mounted (letterboxed title card)");
-    
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handleChange = (e) => setPrefersReducedMotion(e.matches);

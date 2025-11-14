@@ -244,12 +244,13 @@ export default function PolaroidStack({
 
               {/* Polaroid frame */}
               <div
-                className="relative bg-white transition-all duration-300 flex flex-col"
+                className="relative transition-all duration-300 flex flex-col"
                 style={{
+                  background: '#ffffff',
                   padding: '8px 8px 0 8px',
                   paddingBottom: isTop ? '0' : '0',
                   boxShadow: isTop ? '0 4px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(0,0,0,0.25)',
-                  borderBottom: isTop ? '0' : '12px solid white'
+                  borderBottom: isTop ? '0' : '12px solid #ffffff'
                 }}
               >
                 {/* Media content */}
@@ -296,17 +297,17 @@ export default function PolaroidStack({
 
                 {/* Caption area - always visible on top card */}
                 {isTop && (
-                  <div className="bg-white" style={{ paddingBottom: '12px' }}>
+                  <div style={{ background: '#ffffff', paddingBottom: '12px' }}>
                     <figcaption
                       className="mt-2 px-2 pb-1 text-center"
                       style={{
                         fontFamily: "'Caveat', 'Dancing Script', 'Brush Script MT', cursive",
-                        fontSize: '15px',
+                        fontSize: '21px',
                         fontWeight: '500',
                         color: '#0A0A0A',
                         letterSpacing: '0.02em',
                         lineHeight: '1.4',
-                        minHeight: '36px',
+                        minHeight: '40px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',

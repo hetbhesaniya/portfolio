@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, ExternalLink, Calendar, Building2, ChevronDown, ChevronUp } from "lucide-react";
 import { useDataFetch } from "@/hooks/useDataFetch";
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 export default function Certifications() {
   const { data: certifications, loading } = useDataFetch("/Data/certifications.json");
   const [showAll, setShowAll] = useState(false);
+  const buttonRef = useRef(null);
 
   if (loading || !certifications.length) {
     return (
@@ -24,21 +25,54 @@ export default function Certifications() {
   const remainingCerts = certifications.slice(3);
   const visibleCerts = showAll ? certifications : initialCerts;
 
+  const handleToggle = () => {
+    if (!buttonRef.current) {
+      setShowAll(!showAll);
+      return;
+    }
+
+    // Capture button's position relative to viewport before toggle
+    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const buttonTop = buttonRect.top + window.scrollY;
+
+    // Toggle state
+    setShowAll(!showAll);
+
+    // Adjust scroll after DOM updates to maintain button position
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (buttonRef.current) {
+          const newButtonRect = buttonRef.current.getBoundingClientRect();
+          const newButtonTop = newButtonRect.top + window.scrollY;
+          const heightDifference = newButtonTop - buttonTop;
+          
+          // Adjust scroll to keep button in same viewport position
+          if (Math.abs(heightDifference) > 1) {
+            window.scrollTo({
+              top: window.scrollY + heightDifference,
+              behavior: 'instant'
+            });
+          }
+        }
+      });
+    });
+  };
+
   return (
-    <section id="certifications" className="py-20 bg-white">
+    <section id="certifications" className="py-20" style={{ background: 'var(--asu-ink)' }}>
       <div className="container mx-auto px-6">
         <SectionHeader 
           title="Certifications" 
           subtitle="Validated expertise and continuous learning credentials." 
         />
 
-        <AnimatePresence initial={false}>
+        <AnimatePresence initial={false} mode="wait">
           <motion.div
             key={showAll ? "all" : "initial"}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 40 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
             className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
             {visibleCerts.map((cert, index) => (
@@ -47,8 +81,7 @@ export default function Certifications() {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="rounded-md overflow-hidden border transition-all duration-300 group"
+                className="experience-card-hover rounded-md overflow-hidden border group"
                 style={{ background: 'var(--asu-ink)', borderColor: 'var(--asu-border)' }}
               >
                 <div className="p-6">
@@ -133,9 +166,9 @@ export default function Certifications() {
         </AnimatePresence>
 
         {remainingCerts.length > 0 && (
-          <div className="flex justify-center mt-8">
+          <div ref={buttonRef} className="flex justify-center mt-8">
             <Button
-              onClick={() => setShowAll(!showAll)}
+              onClick={handleToggle}
               variant={showAll ? "outline" : "secondary"}
               size="md"
             >

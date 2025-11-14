@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
-// Track if console.info has been logged
-let hasLogged = false;
-
 /**
  * TitleTag - Compact cinematic caption component
  * @param {Object} props
@@ -15,11 +12,6 @@ export default function TitleTag({ title, meta, oneLiner }) {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    if (!hasLogged) {
-      console.info("TitleTag captions active on AboutMe");
-      hasLogged = true;
-    }
-
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     setPrefersReducedMotion(mediaQuery.matches);
     const handleChange = (e) => setPrefersReducedMotion(e.matches);

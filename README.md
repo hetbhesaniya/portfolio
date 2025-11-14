@@ -55,7 +55,7 @@ ASU Portfolio/
 ├── styles/                # Global styles
 │   └── globals.css
 ├── utils/                 # Utility functions
-│   └── scroll.js          # Scroll utilities (throttle, debounce)
+│   └── scroll.js          # Scroll utilities (throttle)
 └── Layout.js              # Root layout component
 
 ```
