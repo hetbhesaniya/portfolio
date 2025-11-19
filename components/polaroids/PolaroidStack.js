@@ -11,7 +11,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * @property {string} [poster]
  * @property {string} alt
  * @property {string} caption
- * @property {boolean} [star]
  */
 
 /**
@@ -21,7 +20,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * @param {"left" | "right"} [props.placement]
  * @param {"portrait" | "landscape"} [props.orientation]
  * @param {Function} [props.onOpenLightbox]
- * @param {Function} [props.onPostCreditOpen]
  * @param {string} [props.className]
  */
 export default function PolaroidStack({
@@ -30,7 +28,6 @@ export default function PolaroidStack({
   placement = "left",
   orientation = "portrait",
   onOpenLightbox = () => {},
-  onPostCreditOpen = () => {},
   className = ""
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);

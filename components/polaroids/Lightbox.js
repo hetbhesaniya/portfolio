@@ -11,7 +11,6 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
  * @property {string} [poster]
  * @property {string} alt
  * @property {string} caption
- * @property {boolean} [star]
  */
 
 /**
@@ -20,14 +19,12 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react";
  * @param {boolean} props.isOpen
  * @param {number} [props.startIndex]
  * @param {Function} props.onClose
- * @param {Function} [props.onPostCreditOpen]
  */
 export default function Lightbox({
   items,
   isOpen,
   startIndex = 0,
-  onClose,
-  onPostCreditOpen = () => {}
+  onClose
 }) {
   const [currentIndex, setCurrentIndex] = useState(startIndex);
   const [preloadedIndices, setPreloadedIndices] = useState(new Set());
@@ -240,18 +237,6 @@ export default function Lightbox({
                 </div>
               )}
 
-              {/* Star badge */}
-              {currentItem.star && (
-                <button
-                  onClick={onPostCreditOpen}
-                  className="absolute top-4 right-4 text-2xl focus:outline-none focus:ring-2 focus:ring-[#E9C46A] rounded p-1"
-                  style={{ color: '#E9C46A' }}
-                  aria-label="Open post-credit scene"
-                  title="post-credit scene"
-                >
-                  ⭐
-                </button>
-              )}
             </div>
 
             {/* Navigation arrows */}

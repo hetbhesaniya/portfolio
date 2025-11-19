@@ -40,8 +40,7 @@ const NEW_STREETS_ITEMS = [
     src: "/new-streets/sunset.webm",
     poster: "/new-streets/sunset-at-lake.jpg",
     alt: "The Circle - people who turned noise into music.",
-    caption: "the circle.",
-    star: true
+    caption: "the circle."
   }
 ];
 
@@ -124,7 +123,6 @@ const SMALL_JOYS_ITEMS = [
 ];
 
 export default function AlternatingPolaroidSection({ 
-  onPostCreditOpen = () => {},
   newStreetsCaption = null,
   circleCaption = null,
   smallJoysCaption = null
@@ -214,7 +212,6 @@ export default function AlternatingPolaroidSection({
                   items={NEW_STREETS_ITEMS}
                   placement="left"
                   onOpenLightbox={(startIndex) => openLightbox(NEW_STREETS_ITEMS, startIndex)}
-                  onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
               <motion.figcaption
@@ -261,7 +258,6 @@ export default function AlternatingPolaroidSection({
                   placement="right"
                   orientation="landscape"
                   onOpenLightbox={(startIndex) => openLightbox(CIRCLE_ITEMS, startIndex)}
-                  onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
             </motion.figure>
@@ -277,7 +273,6 @@ export default function AlternatingPolaroidSection({
                   items={SMALL_JOYS_ITEMS}
                   placement="left"
                   onOpenLightbox={(startIndex) => openLightbox(SMALL_JOYS_ITEMS, startIndex)}
-                  onPostCreditOpen={onPostCreditOpen}
                 />
               </div>
               <motion.figcaption
@@ -327,7 +322,6 @@ export default function AlternatingPolaroidSection({
         isOpen={lightboxOpen}
         startIndex={lightboxStartIndex}
         onClose={() => setLightboxOpen(false)}
-        onPostCreditOpen={onPostCreditOpen}
       />
     </>
   );

@@ -30,7 +30,7 @@ export default function AboutMe() {
     const titleText = titleFullText.slice(0, titleCharCount);
     const titleDone = titleCharCount >= titleFullText.length;
     const heroHasScrolledRef = useRef(false);
-    const { scrollYProgress, scrollY } = useScroll();
+    const { scrollY } = useScroll();
 
     useEffect(() => {
         const handleScroll = throttle(() => {
@@ -202,7 +202,7 @@ export default function AboutMe() {
                         {titleCharCount < titleFullText.length && !prefersReducedMotion && (
                             <span className="inline-block w-2 h-8 bg-[#F4F2EE] ml-1 align-middle animate-pulse" aria-hidden="true" />
                         )}
-                        {!prefersReducedMotion && (
+                        {!prefersReducedMotion && titleCharCount < titleFullText.length && (
                             <motion.span
                                 initial={{ opacity: 0, x: "-120%" }}
                                 animate={{ opacity: [0, 0.08, 0], x: "160%" }}
@@ -276,23 +276,6 @@ export default function AboutMe() {
                         written & built by het bhesaniya
                     </motion.p>
                 </motion.div>
-
-                {/* Runtime progress */}
-                <div
-                    className="fixed bottom-0 left-0 right-0 pointer-events-none z-30"
-                    aria-hidden="true"
-                >
-                    <div style={{ height: "2px", background: "rgba(233,196,106,0.25)" }}>
-                        <motion.div
-                            style={{
-                                height: "100%",
-                                background: "#E9C46A",
-                                transformOrigin: "left center",
-                                scaleX: scrollYProgress
-                            }}
-                        />
-                    </div>
-                </div>
             </section>
 
             {/* SCENE 2 — Roots (Childhood & Family) */}
@@ -310,18 +293,18 @@ export default function AboutMe() {
                 {/* Vignette for depth, matched to Scene 1 */}
                 <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1, background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)' }} />
 
-                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
                     {/* Polaroid/Tape frame photo */}
                     <motion.div
-                        initial={{ opacity: 0, x: -100, rotate: -5 }}
+                        initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -100, rotate: prefersReducedMotion ? 0 : -5 }}
                         whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="relative"
+                        className="relative mb-8 md:mb-0"
                         style={{ transformOrigin: 'left center' }}
                         ref={photoRef}
                     >
-                        <div className="relative border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-2">
+                        <div className="relative border-4 md:border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-1 md:p-2">
                             <div className="relative aspect-[16/9] overflow-hidden">
                                 <Image
                                     src="/photos/Childhood.jpeg"
@@ -363,12 +346,12 @@ export default function AboutMe() {
                         >
                             Chapter 01
                         </motion.div>
-                        <h2 className="text-4xl md:text-5xl font-bold mb-8 text-white" style={{ 
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-white" style={{ 
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}>
                             Roots
                         </h2>
-                        <div className="space-y-6 text-lg md:text-xl leading-relaxed text-white/90" style={{
+                        <div className="space-y-4 md:space-y-6 text-base sm:text-lg md:text-xl leading-relaxed text-white/90" style={{
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}>
                             <p>I grew up watching my parents turn struggle into strength.</p>
@@ -382,7 +365,7 @@ export default function AboutMe() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.9 }}
-                            className="mt-6 text-white/60 text-lg"
+                            className="mt-6 text-white/60 text-xl"
                             style={{ fontFamily: "'Caveat', cursive" }}
                         >
                             "everything I build started here."
@@ -409,13 +392,23 @@ export default function AboutMe() {
                     transition={{ duration: 1.5 }}
                     className="max-w-4xl mx-auto text-center relative z-10"
                 >
+                    {/* Chapter label */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="tracking-[0.35em] uppercase text-sm mb-4 text-white/60"
+                    >
+                        Chapter 02
+                    </motion.div>
                     {/* Becoming title - slower fade */}
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, delay: 0.3 }}
-                        className="text-4xl md:text-6xl font-bold mb-12 text-white" 
+                        className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 md:mb-12 text-white" 
                         style={{ 
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}
@@ -423,7 +416,7 @@ export default function AboutMe() {
                         Becoming
                     </motion.h2>
                     
-                    <div className="space-y-8 text-xl md:text-2xl leading-relaxed text-white/90 mb-8" style={{
+                    <div className="space-y-6 md:space-y-8 text-lg sm:text-xl md:text-2xl leading-relaxed text-white/90 mb-6 md:mb-8 px-4" style={{
                         fontFamily: "'Playfair Display', Georgia, serif"
                     }}>
                         <motion.p
@@ -447,14 +440,8 @@ export default function AboutMe() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.9 }}
-                            className="relative inline-block"
                         >
                             That's where adulting began — learning, unlearning, missing home, finding calm inside chaos.
-                            {/* Golden underline glow */}
-                            <span className="absolute bottom-0 left-0 w-full h-0.5" style={{
-                                background: "linear-gradient(90deg, transparent, #FFC627, #FFB800, transparent)",
-                                boxShadow: "0 0 15px rgba(255, 198, 39, 0.6), 0 0 25px rgba(255, 184, 0, 0.4)"
-                            }} />
                         </motion.p>
                     </div>
 
@@ -464,37 +451,20 @@ export default function AboutMe() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 1.7 }}
-                        className="mt-12 text-white/70 text-lg italic"
+                        className="mt-12 text-white/70 italic"
                         style={{
                             fontFamily: "'Caveat', cursive",
-                            transform: 'rotate(-2deg)'
+                            transform: 'rotate(-2deg)',
+                            fontSize: '28px'
                         }}
                     >
-                        "Still calling mom for recipes."
-                    </motion.div>
-
-                    {/* Optional handwritten annotation in corner */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 2.2 }}
-                        className="absolute bottom-4 right-4 text-white/40 text-xs"
-                        style={{
-                            fontFamily: "'Caveat', cursive",
-                            transform: 'rotate(5deg)'
-                        }}
-                    >
-                        "probably overthinking everything right here ↑"
+                      " Still calling mom for recipes!"
                     </motion.div>
                 </motion.div>
             </section>
 
             {/* Alternating Polaroid Section */}
             <AlternatingPolaroidSection
-                onPostCreditOpen={() => {
-                    // Post-credit scene handler
-                }}
                 newStreetsCaption={{
                     title: "Deer at the fence",
                     meta: ["TEMPE, AZ", "50 MM", "ISO 400", "ROLL 02 / F03"],
@@ -519,14 +489,24 @@ export default function AboutMe() {
                     transition={{ duration: 1 }}
                     className="max-w-4xl mx-auto text-center relative z-10"
                 >
-                    <h2 className="text-4xl md:text-6xl font-bold mb-12 text-black" style={{ 
+                    {/* Chapter label */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        className="tracking-[0.35em] uppercase text-sm mb-4 text-black/60"
+                    >
+                        Chapter 03
+                    </motion.div>
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 md:mb-12 text-black px-4" style={{ 
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 600
                     }}>
                         Today
                     </h2>
 
-                    <div className="space-y-6 text-xl md:text-2xl leading-relaxed text-black/80" style={{
+                    <div className="space-y-4 md:space-y-6 text-lg sm:text-xl md:text-2xl leading-relaxed text-black/80 px-4" style={{
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300
                     }}>
@@ -574,7 +554,7 @@ export default function AboutMe() {
                                 "Still dancing between logic and emotion.",
                                 "Always curious."
                             ]}
-                            className="text-3xl md:text-4xl mb-16 leading-relaxed"
+                            className="text-2xl sm:text-3xl md:text-4xl mb-12 md:mb-16 leading-relaxed"
                             style={{
                                 color: "#000000",
                                 fontWeight: 600,
