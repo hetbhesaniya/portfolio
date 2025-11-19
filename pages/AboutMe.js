@@ -202,19 +202,6 @@ export default function AboutMe() {
                         {titleCharCount < titleFullText.length && !prefersReducedMotion && (
                             <span className="inline-block w-2 h-8 bg-[#F4F2EE] ml-1 align-middle animate-pulse" aria-hidden="true" />
                         )}
-                        {!prefersReducedMotion && titleCharCount < titleFullText.length && (
-                            <motion.span
-                                initial={{ opacity: 0, x: "-120%" }}
-                                animate={{ opacity: [0, 0.08, 0], x: "160%" }}
-                                transition={{ duration: 1, delay: 1.2, ease: "easeInOut" }}
-                                className="absolute inset-y-0 w-1/3"
-                                style={{
-                                    background: "linear-gradient(135deg, transparent, rgba(233,196,106,0.5), transparent)",
-                                    mixBlendMode: "screen"
-                                }}
-                                aria-hidden="true"
-                            />
-                        )}
                     </motion.h1>
 
                     <div className="space-y-5 mb-10">
@@ -458,7 +445,7 @@ export default function AboutMe() {
                             fontSize: '28px'
                         }}
                     >
-                      " Still calling mom for recipes!"
+                      " Fun fact: Still calling mom for recipes!"
                     </motion.div>
                 </motion.div>
             </section>

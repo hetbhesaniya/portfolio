@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import StoryModeHint from "@/components/StoryModeHint";
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -20,12 +21,12 @@ export default function Footer() {
                     </motion.button>
                     
                     <div className="flex items-center justify-center space-x-2 mb-2" style={{ color: 'var(--asu-text-muted)' }}>
-                        <span>Forged with code, refined by data</span>
+                        <span>Built with intention, refined by iteration</span>
                     </div>
                     
-                    <p className="text-xs italic mb-4" style={{ color: 'var(--asu-text-muted)' }}>
-                        psst... there's a story mode ✨
-                    </p>
+                    <div className="text-xs italic mb-4">
+                        <StoryModeHint />
+                    </div>
                     
                     <p className="text-sm" style={{ color: 'var(--asu-text-muted)' }}>
                         © {new Date().getFullYear()} Het Bhesaniya. All rights reserved.

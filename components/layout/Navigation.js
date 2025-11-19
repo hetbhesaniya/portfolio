@@ -280,6 +280,7 @@ export default function Navigation() {
                     {/* Right: Toggle Button + Mobile Menu */}
                     <div className="ml-auto flex items-center space-x-4">
                         <motion.button
+                            data-story-trigger
                             onMouseDown={(e) => {
                                 // Only handle mouse events on desktop
                                 if (window.innerWidth >= 768) {
