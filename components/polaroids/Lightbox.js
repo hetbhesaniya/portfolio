@@ -188,20 +188,20 @@ export default function Lightbox({
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.3 }}
-          className="relative w-full max-w-4xl mx-4 z-10"
+          className="relative w-full max-w-4xl mx-2 md:mx-4 z-10"
         >
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute -top-12 right-0 text-[#F4F2EE] hover:text-[#E9C46A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A] rounded p-2"
+            className="absolute top-2 right-2 md:-top-12 md:right-0 text-[#F4F2EE] hover:text-[#E9C46A] active:text-[#E9C46A] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A] rounded p-2 bg-black/60 md:bg-transparent z-50 touch-manipulation"
             aria-label="Close lightbox"
           >
-            <X size={24} />
+            <X size={20} className="md:w-6 md:h-6" />
           </button>
 
           {/* Media container */}
           <figure className="relative bg-black rounded-lg overflow-hidden">
-            <div className="relative bg-black flex items-center justify-center" style={{ minHeight: '60vh', maxHeight: '90vh', width: '100%' }}>
+            <div className="relative bg-black flex items-center justify-center" style={{ minHeight: 'clamp(40vh, 50vh, 60vh)', maxHeight: '90vh', width: '100%' }}>
               {currentItem.type === "video" ? (
                 <video
                   ref={videoRef}
@@ -244,24 +244,24 @@ export default function Lightbox({
               <>
                 <button
                   onClick={handlePrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-[#F4F2EE] p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A]"
+                  className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 active:bg-black/90 text-[#F4F2EE] p-2 md:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A] touch-manipulation"
                   aria-label="Previous image"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={20} className="md:w-6 md:h-6" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-[#F4F2EE] p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A]"
+                  className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 bg-black/70 hover:bg-black/80 active:bg-black/90 text-[#F4F2EE] p-2 md:p-3 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-[#E9C46A] touch-manipulation"
                   aria-label="Next image"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={20} className="md:w-6 md:h-6" />
                 </button>
               </>
             )}
 
             {/* Counter */}
             <div
-              className="absolute top-4 left-4 bg-black/50 px-3 py-1 rounded text-sm font-mono"
+              className="absolute top-2 left-2 md:top-4 md:left-4 bg-black/70 md:bg-black/50 px-2 py-1 md:px-3 rounded text-xs md:text-sm font-mono"
               style={{ color: '#F4F2EE' }}
             >
               {currentIndex + 1} / {items.length}
@@ -271,7 +271,7 @@ export default function Lightbox({
           {/* Caption */}
           <figcaption
             id="lightbox-title"
-            className="mt-4 text-center text-sm"
+            className="mt-3 md:mt-4 text-center text-xs md:text-sm px-2"
             style={{
               fontFamily: 'ui-rounded, system-ui, sans-serif',
               fontStyle: 'italic',

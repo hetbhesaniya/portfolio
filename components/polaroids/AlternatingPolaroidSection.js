@@ -32,15 +32,15 @@ const NEW_STREETS_ITEMS = [
     type: "image",
     src: "/new-streets/sunset-at-lake.jpg",
     alt: "Sunset at the lake reset everything.",
-    caption: "sunset at the lake."
+    caption: "peaceful sunset at the lake."
   },
   {
     id: "sunset",
     type: "video",
     src: "/new-streets/sunset.webm",
     poster: "/new-streets/sunset-at-lake.jpg",
-    alt: "The Circle - people who turned noise into music.",
-    caption: "the circle."
+    alt: "Sunset at Mountain Cliff San Diego",
+    caption: "best sunset I've seen so far."
   }
 ];
 
@@ -171,22 +171,22 @@ export default function AlternatingPolaroidSection({
   return (
     <>
       <section
-        className="py-20 relative overflow-hidden"
+        className="py-12 md:py-20 relative overflow-hidden"
         style={{ background: '#0A0A0A' }}
       >
         <FilmGrain />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
           {/* Contact sheet label */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            className="text-center mb-8 md:mb-16"
           >
             <p
-              className="text-xs uppercase tracking-[0.2em] font-mono"
+              className="text-[10px] md:text-xs uppercase tracking-[0.2em] font-mono px-2"
               style={{ color: '#F4F2EE' }}
             >
               ROLL 02 — NEW STREETS · ISO 400 • light leaks allowed
@@ -199,14 +199,14 @@ export default function AlternatingPolaroidSection({
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
-            className="space-y-24"
+            className="space-y-12 md:space-y-24"
           >
             {/* Row 1: New Streets - Stack left, text right */}
             <motion.figure
               variants={rowVariants}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-8 lg:gap-12 items-center"
             >
-              <div className="order-2 lg:order-1">
+              <div className="order-1 lg:order-1">
                 <PolaroidStack
                   title="New Streets"
                   items={NEW_STREETS_ITEMS}
@@ -219,7 +219,7 @@ export default function AlternatingPolaroidSection({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-1 lg:order-2 self-center"
+                className="order-2 lg:order-2 self-center flex justify-center lg:justify-start"
               >
                 {newStreetsCaption && (
                   <TitleTag
@@ -234,14 +234,14 @@ export default function AlternatingPolaroidSection({
             {/* Row 2: The Circle - Stack right, text left */}
             <motion.figure
               variants={rowVariants}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-8 lg:gap-12 items-center"
             >
               <motion.figcaption
                 initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-2 lg:order-1 self-center"
+                className="order-2 lg:order-1 self-center flex justify-center lg:justify-start"
               >
                 {circleCaption && (
                   <TitleTag
@@ -265,9 +265,9 @@ export default function AlternatingPolaroidSection({
             {/* Row 3: Small Joys - Stack left, text right */}
             <motion.figure
               variants={rowVariants}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-8 lg:gap-12 items-center"
             >
-              <div className="order-2 lg:order-1">
+              <div className="order-1 lg:order-1">
                 <PolaroidStack
                   title="Small Joys"
                   items={SMALL_JOYS_ITEMS}
@@ -280,7 +280,7 @@ export default function AlternatingPolaroidSection({
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="order-1 lg:order-2 self-center"
+                className="order-2 lg:order-2 self-center flex justify-center lg:justify-start"
               >
                 {smallJoysCaption && (
                   <TitleTag
@@ -295,14 +295,14 @@ export default function AlternatingPolaroidSection({
             {/* Closing gold rule and text */}
             <motion.div
               variants={rowVariants}
-              className="pt-12 mt-16"
+              className="pt-8 mt-8 md:pt-12 md:mt-16"
             >
               <div
-                className="w-24 h-px mx-auto mb-8"
+                className="w-16 md:w-24 h-px mx-auto mb-6 md:mb-8"
                 style={{ background: '#E9C46A' }}
               />
               <p
-                className="text-center text-lg italic"
+                className="text-center text-base md:text-lg italic px-4"
                 style={{
                   fontFamily: "'Playfair Display', Georgia, serif",
                   color: '#F4F2EE',

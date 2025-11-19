@@ -141,10 +141,10 @@ export default function PolaroidStack({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute -top-12 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none"
+            className="absolute -top-8 md:-top-12 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none px-2"
             style={{ color: '#F4F2EE' }}
           >
-            <p className="text-xs font-mono whitespace-nowrap">
+            <p className="text-[10px] md:text-xs font-mono whitespace-nowrap">
               {isTouchDevice ? "Swipe to see more →" : "Use arrows to navigate"}
             </p>
           </motion.div>
@@ -153,11 +153,11 @@ export default function PolaroidStack({
 
       {/* Stack container */}
       <div
-        className={`relative w-full mx-auto ${orientation === "landscape" ? "max-w-[420px]" : "max-w-[340px]"}`}
+        className={`relative w-full mx-auto ${orientation === "landscape" ? "max-w-[280px] md:max-w-[420px]" : "max-w-[240px] md:max-w-[340px]"}`}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         style={{ 
-          minHeight: orientation === "landscape" ? '340px' : '380px',
+          minHeight: orientation === "landscape" ? 'clamp(220px, 60vw, 340px)' : 'clamp(280px, 70vw, 380px)',
           perspective: '1200px',
           perspectiveOrigin: 'center center'
         }}
@@ -167,17 +167,17 @@ export default function PolaroidStack({
           <>
             <button
               onClick={handlePrevious}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 md:-translate-x-12 z-30 bg-black/60 hover:bg-black/80 text-[#F4F2EE] hover:text-[#E9C46A] p-1.5 md:p-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#E9C46A] focus:ring-offset-2 focus:ring-offset-black"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-8 lg:-translate-x-12 z-30 bg-black/70 hover:bg-black/80 active:bg-black/90 text-[#F4F2EE] hover:text-[#E9C46A] p-1.5 md:p-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#E9C46A] focus:ring-offset-2 focus:ring-offset-black touch-manipulation"
               aria-label="Previous image"
             >
-              <ChevronLeft size={18} className="md:w-5 md:h-5" />
+              <ChevronLeft size={16} className="md:w-5 md:h-5" />
             </button>
             <button
               onClick={handleNext}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8 md:translate-x-12 z-30 bg-black/60 hover:bg-black/80 text-[#F4F2EE] hover:text-[#E9C46A] p-1.5 md:p-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#E9C46A] focus:ring-offset-2 focus:ring-offset-black"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-8 lg:translate-x-12 z-30 bg-black/70 hover:bg-black/80 active:bg-black/90 text-[#F4F2EE] hover:text-[#E9C46A] p-1.5 md:p-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#E9C46A] focus:ring-offset-2 focus:ring-offset-black touch-manipulation"
               aria-label="Next image"
             >
-              <ChevronRight size={18} className="md:w-5 md:h-5" />
+              <ChevronRight size={16} className="md:w-5 md:h-5" />
             </button>
           </>
         )}
@@ -244,10 +244,10 @@ export default function PolaroidStack({
                 className="relative transition-all duration-300 flex flex-col"
                 style={{
                   background: '#ffffff',
-                  padding: '8px 8px 0 8px',
+                  padding: 'clamp(6px, 1.5vw, 8px) clamp(6px, 1.5vw, 8px) 0 clamp(6px, 1.5vw, 8px)',
                   paddingBottom: isTop ? '0' : '0',
                   boxShadow: isTop ? '0 4px 20px rgba(0,0,0,0.35)' : '0 2px 12px rgba(0,0,0,0.25)',
-                  borderBottom: isTop ? '0' : '12px solid #ffffff'
+                  borderBottom: isTop ? '0' : 'clamp(8px, 2vw, 12px) solid #ffffff'
                 }}
               >
                 {/* Media content */}
@@ -299,12 +299,12 @@ export default function PolaroidStack({
                       className="mt-2 px-2 pb-1 text-center"
                       style={{
                         fontFamily: "'Caveat', 'Dancing Script', 'Brush Script MT', cursive",
-                        fontSize: '21px',
+                        fontSize: 'clamp(16px, 4vw, 21px)',
                         fontWeight: '500',
                         color: '#0A0A0A',
                         letterSpacing: '0.02em',
                         lineHeight: '1.4',
-                        minHeight: '40px',
+                        minHeight: 'clamp(32px, 8vw, 40px)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',

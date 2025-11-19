@@ -23,14 +23,14 @@ export default function TitleTag({ title, meta, oneLiner }) {
 
   return (
     <motion.div
-      className="w-full max-w-[420px] lg:max-w-[400px] py-2"
+      className="w-full max-w-[420px] lg:max-w-[400px] py-2 text-center lg:text-left mx-auto lg:mx-0"
       initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
     >
       {/* Decorative leader line */}
       <div
-        className="w-8 h-px mb-2 opacity-10"
+        className="w-8 h-px mb-2 opacity-10 mx-auto lg:mx-0"
         style={{ background: "#F4F2EE" }}
         aria-hidden="true"
       />
@@ -48,7 +48,7 @@ export default function TitleTag({ title, meta, oneLiner }) {
 
       {/* Meta */}
       <p
-        className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-mono mb-2 break-words"
+        className="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-mono mb-2 break-words mx-auto lg:mx-0"
         style={{
           color: "#F4F2EE",
           opacity: 0.7,

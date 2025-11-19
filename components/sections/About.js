@@ -15,13 +15,13 @@ export default function About() {
             <div className="container mx-auto px-6">
                 <SectionHeader title="About Me" />
 
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                        <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--asu-text-muted)' }}>
+                        <div className="space-y-4 md:space-y-6 text-base md:text-lg leading-relaxed" style={{ color: 'var(--asu-text-muted)' }}>
                             <p>
                                 I’m a Software Engineer and Data Engineer with a passion for building systems that are as reliable as they are intelligent.  
                                 My focus lies at the intersection of backend engineering, cloud infrastructure, and data-driven problem solving.  
@@ -66,8 +66,7 @@ export default function About() {
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 transition={{ duration: 0.6, delay: 0.2 * index }}
-                                whileHover={{ scale: 1.05 }}
-                                className="p-6 rounded-md border transition-all duration-300"
+                                className="p-6 rounded-md border transition-all duration-300 shadow-md hover:shadow-lg"
                                 style={{ background: 'var(--asu-ink)', borderColor: 'var(--asu-border)' }}
                             >
                                 <div className="flex items-center space-x-4">
