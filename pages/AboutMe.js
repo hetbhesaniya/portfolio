@@ -34,24 +34,24 @@ export default function AboutMe() {
 
     useEffect(() => {
         const handleScroll = throttle(() => {
-            const scrollY = window.scrollY;
+            const scrollPosition = window.scrollY;
             
             // Parallax for paper background
             if (paperRef.current) {
-                paperRef.current.style.transform = `translateY(${scrollY * 0.02}px)`;
+                paperRef.current.style.transform = `translateY(${scrollPosition * 0.02}px)`;
             }
             
             // Subtle parallax for Scene 2 photo and text
             if (photoRef.current) {
-                const yPhoto = scrollY * 0.015;
+                const yPhoto = scrollPosition * 0.015;
                 photoRef.current.style.transform = `translateY(${yPhoto}px)`;
                 photoRef.current.style.transformOrigin = 'left center';
             }
             
             if (textRef.current) {
-                textRef.current.style.transform = `translateY(${scrollY * 0.01}px)`;
+                textRef.current.style.transform = `translateY(${scrollPosition * 0.01}px)`;
             }
-        }, 16); // ~60fps throttling
+        }, 16);
         
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
@@ -453,17 +453,23 @@ export default function AboutMe() {
             {/* Alternating Polaroid Section */}
             <AlternatingPolaroidSection
                 newStreetsCaption={{
-                    title: "Deer at the fence",
+                    title: "First few months in the US",
                     meta: ["TEMPE, AZ", "50 MM", "ISO 400", "ROLL 02 / F03"],
-                    oneLiner: "Sunset at the lake reset everything."
+                    oneLiner: "late bus, early character arc."
                 }}
                 circleCaption={{
-                    title: "Confetti in a small room",
-                    meta: ["MESA, AZ", "1/125S", "F/2.8", "ROLL 02 / F07"]
+                    title: "People who made life better",
+                    meta: ["MESA, AZ", "1/125S", "F/2.8", "ROLL 02 / F07"],
+                    oneLiner: "friends in frame, home in feeling."
+                }}
+                smallJoysCaption={{
+                    title: "My first audience",
+                    meta: ["Ahmedabad, IN", "50 MM", "ISO 400", "ROLL 02 / F03"],
+                    oneLiner: "my cheer, her giggle, our story."
                 }}
             />
 
-            {/* Craft & Mindset • People & Care Letterboxed Title Card */}
+            {/* SCENE 4 — Principles (The Way I Build) */}
             <CraftCareLetterbox />
 
             {/* SCENE 6 — Today (Present & Drive) */}

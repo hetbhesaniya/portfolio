@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function StoryModeHint() {
   const [text, setText] = useState("psst... there's a story mode ✨");
-  const [isRevealed, setIsRevealed] = useState(false);
   const revertTimerRef = useRef(null);
   const highlightTimerRef = useRef(null);
 
@@ -21,7 +20,6 @@ export default function StoryModeHint() {
     if (trigger) {
       // Update text
       setText("See the blinking icon above - Tap to know more about me ✨");
-      setIsRevealed(true);
 
       // Scroll to trigger
       trigger.scrollIntoView({ 
@@ -66,17 +64,14 @@ export default function StoryModeHint() {
       // Auto-revert text after ~6000ms
       revertTimerRef.current = setTimeout(() => {
         setText("psst... there's a story mode ✨");
-        setIsRevealed(false);
       }, 6000);
     } else {
       // No target found - show fallback
       setText("Look for the 🎬 Story Mode button in the header.");
-      setIsRevealed(true);
 
       // Auto-revert after ~6000ms
       revertTimerRef.current = setTimeout(() => {
         setText("psst... there's a story mode ✨");
-        setIsRevealed(false);
       }, 6000);
     }
   };
@@ -108,4 +103,3 @@ export default function StoryModeHint() {
     </button>
   );
 }
-
