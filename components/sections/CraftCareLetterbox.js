@@ -1,195 +1,193 @@
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 
 export default function CraftCareLetterbox() {
   const prefersReducedMotion = useReducedMotion();
 
   const principles = [
     {
-      category: "How I Build",
+      category: "HOW I THINK",
       items: [
-        "I care about the quiet details — the loading states, the error messages, the empty screens.",
-        "Performance isn't optional. Fast feels good.",
-        "Accessibility is a conversation, not a checklist.",
-        "I measure twice, build once, then measure again."
+        "Start with people, not features.",
+        "Clarity over cleverness.",
+        "Simple first, then scalable.",
+        "Defaults should feel right.",
+        "Edge cases are part of the product.",
+        "If it feels heavy, cut it."
       ]
     },
     {
-      category: "How I Work",
+      category: "HOW I WORK",
       items: [
-        "Feedback is a gift. I listen before I defend.",
-        "Clear docs save time. Tight loops save sanity.",
-        "The best solutions happen when engineers and designers talk early.",
-        "Care shows up in the edges — the moments others might skip."
+        "Feedback early, never defensive.",
+        "Write the plan, then code.",
+        "Small PRs, tight loops.",
+        "Pair with design before sprint one.",
+        "Document decisions as you go.",
+        "Ship, measure, iterate."
       ]
     }
   ];
 
+  const staggerDelay = prefersReducedMotion ? 0 : 0.07;
+  const animationDuration = prefersReducedMotion ? 0 : 0.18;
+
   return (
-    <section 
-      className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden" 
-      style={{ background: "#000" }}
+    <section
+      className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
+      style={{ background: "#000", paddingTop: '40px', paddingBottom: '100px' }}
     >
-      {/* Ripped paper texture overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-20 z-0" style={{ 
-        WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)', 
-        maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)' 
-      }}>
-        <Image
-          src="/Ripped paper.png"
-          alt="Background texture"
-          fill
-          className="object-cover"
-          style={{ mixBlendMode: 'overlay' }}
-        />
-      </div>
+      {/* Soft radial gray gradient for depth */}
+      <div
+        className="absolute inset-0 opacity-30 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at center, rgba(26,26,26,0.4) 0%, transparent 70%)"
+        }}
+      />
+      
+      {/* Dim city skyline background - using a dark gradient */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          background: "linear-gradient(to top, #000 0%, #1a1a1a 50%, #0a0a0a 100%)"
+        }}
+      />
 
-      {/* Vignette effect */}
-      <div className="absolute inset-0 pointer-events-none z-0" style={{
-        background: "radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)"
-      }} />
-
-      {/* Film grain overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.02] z-0" style={{
-        backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\\'0 0 400 400\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'n\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'1.5\\' numOctaves=\\'4\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23n)\\'/%3E%3C/svg%3E')",
-        backgroundSize: '400px 400px'
-      }} />
+      {/* Film grain overlay - 2-3% opacity */}
+      <div
+        className="fixed inset-0 pointer-events-none opacity-[0.025] z-0"
+        style={{
+          backgroundImage: "url('data:image/svg+xml,%3Csvg viewBox=\\'0 0 400 400\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cfilter id=\\'n\\'%3E%3CfeTurbulence type=\\'fractalNoise\\' baseFrequency=\\'1.5\\' numOctaves=\\'4\\'/%3E%3C/filter%3E%3Crect width=\\'100%25\\' height=\\'100%25\\' filter=\\'url(%23n)\\'/%3E%3C/svg%3E')",
+          backgroundSize: "400px 400px"
+        }}
+      />
 
       {/* Content */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 1.2 }}
-        className="max-w-5xl mx-auto relative z-10"
+        transition={{ duration: prefersReducedMotion ? 0 : 1.2 }}
+        className="relative mx-auto z-10 md:-mt-20 mt-8"
+        style={{ maxWidth: "1360px" }}
       >
-        {/* Chapter label */}
+        {/* Chapter label - kicker */}
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : -10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center mb-8"
+          transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.2 }}
+          className="text-center mb-6 md:mb-8"
         >
           <p
             className="text-[0.7rem] tracking-[0.4em] uppercase"
             style={{ color: "rgba(244,242,238,0.7)" }}
           >
-            CHAPTER 04 <span style={{ color: "#E9C46A" }}>•</span> PRINCIPLES
+            CHAPTER 03 <span style={{ color: "#E9C46A" }}>•</span> PRINCIPLES
           </p>
         </motion.div>
 
         {/* Main heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        <motion.h1
+          initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center mb-16 tracking-tight px-4"
+          transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: 0.3 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center tracking-tight px-4"
           style={{
             fontFamily: "'Playfair Display', Georgia, serif",
-            color: "#F4F2EE"
+            color: "#F4F2EE",
+            marginBottom: '56px'
           }}
         >
           The Way I Build
-        </motion.h2>
+        </motion.h1>
 
         {/* Principles sections */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 lg:gap-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-center" style={{ gap: '120px', alignItems: 'start' }}>
           {principles.map((principle, sectionIndex) => (
             <motion.div
               key={principle.category}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.4 + sectionIndex * 0.2 }}
-              className="max-w-full"
+              transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: 0.4 + sectionIndex * 0.2 }}
+              className="mx-auto text-center md:text-left"
+              style={{ maxWidth: '36ch' }}
             >
               {/* Category label */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 + sectionIndex * 0.2 }}
-                className="mb-6"
+                transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.5 + sectionIndex * 0.2 }}
+                className="md:text-left text-center"
+                style={{ marginBottom: '32px' }}
               >
-                <h3
-                  className="text-lg tracking-[0.3em] uppercase"
+                <h2
+                  className="text-base tracking-[0.35em] uppercase"
                   style={{ 
-                    color: "#E9C46A",
+                    color: "rgba(233,196,106,0.5)",
                     fontFamily: "'Inter', sans-serif",
-                    fontWeight: 600
+                    fontWeight: 400
                   }}
                 >
                   {principle.category}
-                </h3>
+                </h2>
               </motion.div>
 
-              {/* Items */}
-              <div className="space-y-6 md:space-y-8">
-                {principle.items.map((item, itemIndex) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ 
-                      duration: 0.7, 
-                      delay: 0.6 + sectionIndex * 0.2 + itemIndex * 0.1,
-                      ease: "easeOut"
-                    }}
-                    className="relative pl-6 md:pl-8"
-                  >
-                    {/* Decorative dash */}
-                    <div
-                      className="absolute left-0 top-3 w-3 h-px"
-                      style={{ background: "rgba(233,196,106,0.5)" }}
-                    />
-                    <p
-                      className="text-lg sm:text-xl md:text-2xl leading-relaxed"
-                      style={{
-                        fontFamily: "'Playfair Display', Georgia, serif",
-                        color: "#F4F2EE"
+              {/* Items list - semantic HTML */}
+              <ul className="space-y-5 md:space-y-6" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {principle.items.map((item, itemIndex) => {
+                  const totalDelay = 0.6 + sectionIndex * 0.2 + itemIndex * staggerDelay;
+                  return (
+                    <motion.li
+                      key={item}
+                      initial={{ 
+                        opacity: 0, 
+                        y: prefersReducedMotion ? 0 : 12 
                       }}
+                      whileInView={{ 
+                        opacity: 1, 
+                        y: 0 
+                      }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ 
+                        duration: animationDuration,
+                        delay: totalDelay,
+                        ease: "easeOut"
+                      }}
+                      className="group relative"
                     >
-                      {item}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
+                      <div className="relative" style={{ maxWidth: '36ch' }}>
+                        <p
+                          className="text-lg sm:text-xl md:text-2xl leading-relaxed relative block cursor-default"
+                          style={{
+                            fontFamily: "'Playfair Display', Georgia, serif",
+                            color: "rgba(244,242,238,0.85)",
+                            lineHeight: '1.4'
+                          }}
+                        >
+                          {item}
+                          
+                          {/* Hairline underline - animates on hover/focus */}
+                          <span
+                            className="absolute bottom-0 left-0 w-0 h-px group-hover:w-full group-focus-within:w-full transition-all ease-out"
+                            style={{
+                              background: "rgba(233,196,106,0.5)",
+                              transitionDuration: prefersReducedMotion ? '0ms' : '150ms',
+                              transitionProperty: prefersReducedMotion ? 'none' : 'width'
+                            }}
+                            aria-hidden="true"
+                          />
+                        </p>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ul>
             </motion.div>
           ))}
         </div>
-
-        {/* Closing handwritten note */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-16 md:mt-20 text-center"
-        >
-          <p
-            className="text-xl md:text-2xl italic"
-            style={{
-              fontFamily: "'Caveat', cursive",
-              color: "rgba(244,242,238,0.75)",
-              transform: 'rotate(-1deg)'
-            }}
-          >
-            "It's not about being perfect. It's about being intentional."
-          </p>
-        </motion.div>
-
-        {/* Decorative divider */}
-        <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          whileInView={{ opacity: 1, scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          className="mt-16 mx-auto w-24 h-px"
-          style={{ background: "rgba(233,196,106,0.4)" }}
-        />
       </motion.div>
     </section>
   );
