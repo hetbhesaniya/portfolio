@@ -33,8 +33,8 @@ export default function CraftCareLetterbox() {
 
   return (
     <section
-      className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden"
-      style={{ background: "#000", paddingTop: '40px', paddingBottom: '100px' }}
+      className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-10 sm:py-16 md:py-20 relative overflow-hidden"
+      style={{ background: "#000" }}
     >
       {/* Soft radial gray gradient for depth */}
       <div
@@ -76,10 +76,10 @@ export default function CraftCareLetterbox() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.2 }}
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-4 sm:mb-6 md:mb-8"
         >
           <p
-            className="text-[0.7rem] tracking-[0.4em] uppercase"
+            className="text-xs sm:text-[0.7rem] tracking-[0.4em] uppercase px-2"
             style={{ color: "rgba(244,242,238,0.7)" }}
           >
             CHAPTER 03 <span style={{ color: "#E9C46A" }}>•</span> PRINCIPLES
@@ -92,18 +92,18 @@ export default function CraftCareLetterbox() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.8, delay: 0.3 }}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-center tracking-tight px-4"
+          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold text-center tracking-tight px-4"
           style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             color: "#F4F2EE",
-            marginBottom: '56px'
+            marginBottom: '40px'
           }}
         >
           The Way I Build
         </motion.h1>
 
         {/* Principles sections */}
-        <div className="grid grid-cols-1 md:grid-cols-2 justify-center" style={{ gap: '120px', alignItems: 'start' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 justify-center gap-12 sm:gap-16 md:gap-20 lg:gap-[120px] items-start px-4 sm:px-0">
           {principles.map((principle, sectionIndex) => (
             <motion.div
               key={principle.category}
@@ -121,10 +121,10 @@ export default function CraftCareLetterbox() {
                 viewport={{ once: true }}
                 transition={{ duration: prefersReducedMotion ? 0 : 0.6, delay: 0.5 + sectionIndex * 0.2 }}
                 className="md:text-left text-center"
-                style={{ marginBottom: '32px' }}
+                style={{ marginBottom: '24px' }}
               >
                 <h2
-                  className="text-base tracking-[0.35em] uppercase"
+                  className="text-sm sm:text-base tracking-[0.35em] uppercase"
                   style={{ 
                     color: "rgba(233,196,106,0.5)",
                     fontFamily: "'Inter', sans-serif",
@@ -136,7 +136,7 @@ export default function CraftCareLetterbox() {
               </motion.div>
 
               {/* Items list - semantic HTML */}
-              <ul className="space-y-5 md:space-y-6" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+              <ul className="space-y-4 sm:space-y-5 md:space-y-6" style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                 {principle.items.map((item, itemIndex) => {
                   const totalDelay = 0.6 + sectionIndex * 0.2 + itemIndex * staggerDelay;
                   return (
@@ -160,7 +160,7 @@ export default function CraftCareLetterbox() {
                     >
                       <div className="relative" style={{ maxWidth: '36ch' }}>
                         <p
-                          className="text-lg sm:text-xl md:text-2xl leading-relaxed relative block cursor-default"
+                          className="text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed relative block cursor-default"
                           style={{
                             fontFamily: "'Playfair Display', Georgia, serif",
                             color: "rgba(244,242,238,0.85)",

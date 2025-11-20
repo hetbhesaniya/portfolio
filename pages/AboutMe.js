@@ -7,6 +7,8 @@ import { ArrowLeft } from "lucide-react";
 import { throttle } from "@/utils/scroll";
 import AlternatingPolaroidSection from "@/components/polaroids/AlternatingPolaroidSection";
 import CraftCareLetterbox from "@/components/sections/CraftCareLetterbox";
+import FutureWhite from "@/components/about/FutureWhite";
+import OutroWhite from "@/components/about/OutroWhite";
 
 function TypewriterText({ lines, className = "", style = {} }) {
     const content = useMemo(() => lines.join("\n\n"), [lines]);
@@ -135,13 +137,13 @@ export default function AboutMe() {
             }} />
 
             {/* Back Button */}
-            <div className="fixed top-6 left-6 z-50">
+            <div className="fixed top-4 left-4 sm:top-6 sm:left-6 z-50">
                 <button
                     onClick={() => router.push('/')}
-                    className="p-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-all duration-300"
+                    className="p-2 sm:p-3 rounded-full border border-white/20 text-white/70 hover:text-white hover:border-white/40 transition-all duration-300"
                     style={{ background: "rgba(0,0,0,0.4)" }}
                 >
-                    <ArrowLeft className="w-5 h-5" />
+                    <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
             </div>
 
@@ -191,7 +193,7 @@ export default function AboutMe() {
                         variants={titleVariants}
                         initial="hidden"
                         animate="visible"
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 tracking-tight px-4 relative"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold mb-4 sm:mb-6 tracking-tight px-4 relative"
                         style={{
                             fontFamily: "'Playfair Display', Georgia, serif",
                             color: "#F4F2EE",
@@ -200,11 +202,11 @@ export default function AboutMe() {
                     >
                         {titleText}
                         {titleCharCount < titleFullText.length && !prefersReducedMotion && (
-                            <span className="inline-block w-2 h-8 bg-[#F4F2EE] ml-1 align-middle animate-pulse" aria-hidden="true" />
+                            <span className="inline-block w-1.5 h-6 sm:w-2 sm:h-8 bg-[#F4F2EE] ml-1 align-middle animate-pulse" aria-hidden="true" />
                         )}
                     </motion.h1>
 
-                    <div className="space-y-5 mb-10">
+                    <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10">
                         {introLines.map((line, index) => (
                             <motion.p
                                 key={line}
@@ -212,7 +214,7 @@ export default function AboutMe() {
                                 variants={lineVariants}
                                 initial="hidden"
                                 animate={titleDone ? "visible" : "hidden"}
-                                className={`text-lg sm:text-xl md:text-2xl leading-relaxed ${index === introLines.length - 1 ? "italic" : ""}`}
+                                className={`text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed px-2 sm:px-0 ${index === introLines.length - 1 ? "italic" : ""}`}
                                 style={{ color: "#F4F2EE" }}
                             >
                                 {line}
@@ -280,18 +282,18 @@ export default function AboutMe() {
                 {/* Vignette for depth, matched to Scene 1 */}
                 <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 1, background: 'radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.7) 100%)' }} />
 
-                <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center relative z-10">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center relative z-10 px-4 sm:px-6">
                     {/* Polaroid/Tape frame photo */}
                     <motion.div
                         initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -100, rotate: prefersReducedMotion ? 0 : -5 }}
                         whileInView={{ opacity: 1, x: 0, rotate: 0 }}
                         viewport={{ once: true, amount: 0.3 }}
                         transition={{ duration: 1, ease: "easeOut" }}
-                        className="relative mb-8 md:mb-0"
+                        className="relative mb-6 sm:mb-8 md:mb-0"
                         style={{ transformOrigin: 'left center' }}
                         ref={photoRef}
                     >
-                        <div className="relative border-4 md:border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-1 md:p-2">
+                        <div className="relative border-3 sm:border-4 md:border-8 border-white/90 shadow-2xl overflow-hidden bg-white p-1 sm:p-2">
                             <div className="relative aspect-[16/9] overflow-hidden">
                                 <Image
                                     src="/photos/Childhood.jpeg"
@@ -329,16 +331,16 @@ export default function AboutMe() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.3 }}
-                            className="tracking-[0.35em] uppercase text-sm mb-4 text-white/60"
+                            className="tracking-[0.35em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 text-white/60 text-center md:text-left"
                         >
                             Chapter 01
                         </motion.div>
-                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 text-white" style={{ 
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 md:mb-8 text-white text-center md:text-left" style={{ 
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}>
                             Roots
                         </h2>
-                        <div className="space-y-4 md:space-y-6 text-base sm:text-lg md:text-xl leading-relaxed text-white/90" style={{
+                        <div className="space-y-3 sm:space-y-4 md:space-y-6 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed text-white/90 text-center md:text-left" style={{
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}>
                             <p>I grew up watching my parents turn struggle into strength.</p>
@@ -352,7 +354,7 @@ export default function AboutMe() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.6, delay: 0.9 }}
-                            className="mt-6 text-white/60 text-xl"
+                            className="mt-4 sm:mt-6 text-white/60 text-lg sm:text-xl text-center md:text-left"
                             style={{ fontFamily: "'Caveat', cursive" }}
                         >
                             "everything I build started here."
@@ -362,7 +364,7 @@ export default function AboutMe() {
             </section>
 
             {/* SCENE 3 — Becoming (The Move, Self-Growth) */}
-            <section className="min-h-screen flex items-center justify-center px-6 py-20 relative" style={{ background: "#000" }}>
+            <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 py-16 sm:py-20 relative" style={{ background: "#000" }}>
                 {/* Soft radial gray gradient for depth */}
                 <div className="absolute inset-0 opacity-30" style={{
                     background: "radial-gradient(ellipse at center, rgba(26,26,26,0.4) 0%, transparent 70%)"
@@ -385,7 +387,7 @@ export default function AboutMe() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="tracking-[0.35em] uppercase text-sm mb-4 text-white/60"
+                        className="tracking-[0.35em] uppercase text-xs sm:text-sm mb-3 sm:mb-4 text-white/60"
                     >
                         Chapter 02
                     </motion.div>
@@ -395,7 +397,7 @@ export default function AboutMe() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1.5, delay: 0.3 }}
-                        className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 md:mb-12 text-white" 
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-6 sm:mb-8 md:mb-12 text-white px-4" 
                         style={{ 
                             fontFamily: "'Playfair Display', Georgia, serif"
                         }}
@@ -403,7 +405,7 @@ export default function AboutMe() {
                         Becoming
                     </motion.h2>
                     
-                    <div className="space-y-6 md:space-y-8 text-lg sm:text-xl md:text-2xl leading-relaxed text-white/90 mb-6 md:mb-8 px-4" style={{
+                    <div className="space-y-4 sm:space-y-6 md:space-y-8 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed text-white/90 mb-6 md:mb-8 px-4" style={{
                         fontFamily: "'Playfair Display', Georgia, serif"
                     }}>
                         <motion.p
@@ -438,11 +440,11 @@ export default function AboutMe() {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 1.7 }}
-                        className="mt-12 text-white/70 italic"
+                        className="mt-8 sm:mt-12 text-white/70 italic px-4"
                         style={{
                             fontFamily: "'Caveat', cursive",
                             transform: 'rotate(-2deg)',
-                            fontSize: '28px'
+                            fontSize: 'clamp(20px, 4vw, 28px)'
                         }}
                     >
                       " Fun fact: Still calling mom for recipes!"
@@ -472,127 +474,12 @@ export default function AboutMe() {
             {/* SCENE 4 — Principles (The Way I Build) */}
             <CraftCareLetterbox />
 
-            {/* SCENE 6 — Today (Present & Drive) */}
-            <section className="min-h-screen flex items-center justify-center px-6 py-20 relative" style={{ background: "#ffffff" }}>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 1 }}
-                    className="max-w-4xl mx-auto text-center relative z-10"
-                >
-                    {/* Chapter label */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="tracking-[0.35em] uppercase text-sm mb-4 text-black/60"
-                    >
-                        Chapter 04
-                    </motion.div>
-                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 md:mb-12 text-black px-4" style={{ 
-                        fontFamily: "'Inter', sans-serif",
-                        fontWeight: 600
-                    }}>
-                        Today
-                    </h2>
-
-                    <div className="space-y-4 md:space-y-6 text-lg sm:text-xl md:text-2xl leading-relaxed text-black/80 px-4" style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontWeight: 300
-                    }}>
-                        <p>Right now, I'm learning, building, and growing </p>
-                        <p>balancing code with creativity, precision with play.</p>
-                        <p className="text-black/60 italic">Still that kid who wanted to make his parents proud,</p>
-                        <p className="text-black/60 italic">just with better Wi-Fi now.</p>
-                    </div>
-                </motion.div>
-            </section>
-
-            {/* SCENE 7 — Outro (Emotional Close) */}
-            <section 
-                className="min-h-screen flex items-center justify-center py-20 relative px-4 sm:px-6 md:px-10" 
-                style={{ 
-                    background: "#fafafa", 
-                    overflow: "visible"
-                }}
-            >
-                {/* Faded paper texture */}
-                <div className="absolute inset-0 opacity-30 pointer-events-none" style={{
-                    backgroundImage: "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23000000\\' fill-opacity=\\'0.03\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
-                }} />
-
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1.5 }}
-                    className="w-full max-w-4xl mx-auto relative z-10"
-                    style={{ 
-                        padding: "0",
-                        overflow: "visible"
-                    }}
-                >
-                    <motion.div 
-                        className="w-full text-center px-4 sm:px-6 md:px-10" 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 0.3 }}
-                    >
-                        <TypewriterText
-                            speed={50}
-                            lines={[
-                                "Still learning.",
-                                "Still dancing between logic and emotion.",
-                                "Always curious."
-                            ]}
-                            className="text-2xl sm:text-3xl md:text-4xl mb-12 md:mb-16 leading-relaxed"
-                            style={{
-                                color: "#000000",
-                                fontWeight: 600,
-                                fontFamily: "'Playfair Display', Georgia, serif"
-                            }}
-                        />
-                    </motion.div>
-
-                    {/* Signature */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 3 }}
-                        className="mb-12 text-2xl text-center"
-                        style={{
-                            fontFamily: "'Caveat', cursive",
-                            color: "#1a1a1a",
-                            fontWeight: 500
-                        }}
-                    >
-                        — Het
-                    </motion.div>
-
-                    {/* Back button */}
-                    <div className="text-center">
-                        <motion.button
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 1, delay: 3.5 }}
-                            whileHover={{ scale: 1.05, backgroundColor: "#000000", color: "#ffffff", borderColor: "#000000" }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => router.push("/Portfolio")}
-                            className="px-8 py-4 border-2 transition-all duration-300 rounded-sm text-lg font-medium"
-                            style={{
-                                fontFamily: "'Inter', sans-serif",
-                                color: "#000000",
-                                borderColor: "#333333",
-                                backgroundColor: "transparent"
-                            }}
-                        >
-                            Back to Portfolio →
-                        </motion.button>
-                    </div>
-                </motion.div>
-            </section>
+            {/* Future & Outro - Cut to white */}
+            <FutureWhite />
+            <OutroWhite
+                onBack={() => router.push('/')}
+                onContact={() => window.location.href = 'mailto:hetbhesaniya0096@gmail.com'}
+            />
     </div>
 );
 }
