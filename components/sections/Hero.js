@@ -166,7 +166,7 @@ export default function Hero() {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 1, delay: 0.5 }}
                     >
-                        <h1 className="text-5xl md:text-7xl font-bold asu-brand">
+                        <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold asu-brand">
                             Het Bhesaniya
                         </h1>
                     </motion.div>
@@ -177,10 +177,10 @@ export default function Hero() {
                         transition={{ duration: 1, delay: 0.8 }}
                         className="mb-8"
                     >
-                        <h2 className="text-2xl md:text-3xl font-light mb-4 tracking-widest uppercase" style={{ color: 'var(--hero-accent)' }}>
+                        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-light mb-4 tracking-widest uppercase px-4" style={{ color: 'var(--hero-accent)' }}>
                             Software Engineer & Data Analyst
                         </h2>
-                        <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--asu-text-muted)' }}>
+                        <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed px-4" style={{ color: 'var(--asu-text-muted)' }}>
                             Building reliable systems, scalable pipelines, and intelligent solutions
                         </p>
                     </motion.div>

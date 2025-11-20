@@ -65,6 +65,8 @@ html, body, #__next {
   --underline-accent: var(--asu-gold);
   --brand-underline: var(--asu-maroon);
   --profile-border-color: var(--asu-maroon);
+  --skill-badge-bg: rgba(255, 198, 39, 0.12);
+  --skill-badge-text: #8C1D40;
 }
 
 /* Theme tokens: ASU Dark */
@@ -103,6 +105,8 @@ html, body, #__next {
   --underline-accent: var(--asu-maroon);
   --brand-underline: var(--asu-gold);
   --profile-border-color: var(--asu-gold);
+  --skill-badge-bg: rgba(140, 29, 64, 0.12);
+  --skill-badge-text: #FFC627;
 }
 
 body {

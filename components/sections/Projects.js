@@ -28,7 +28,7 @@ export default function Projects() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader title="Projects" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8">
           {projects.map((project, index) => (
             <motion.div
               key={project.id}
@@ -51,24 +51,25 @@ export default function Projects() {
                     alt={project.title}
                       width={400}
                       height={200}
-                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-24 sm:h-40 md:h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
                   </div>
                 )}
-                <div className="p-5">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: 'var(--heading-accent)' }}>
+                <div className="p-2.5 sm:p-4 md:p-5">
+                  <h3 className="text-sm sm:text-lg md:text-xl font-bold mb-1 sm:mb-2" style={{ color: 'var(--heading-accent)' }}>
                     {project.title}
                   </h3>
-                  <p className="text-sm mb-4 line-clamp-3" style={{ color: 'var(--asu-text-muted)' }}>
+                  <p className="text-xs mb-2 sm:mb-4 line-clamp-2 sm:line-clamp-3" style={{ color: 'var(--asu-text-muted)' }}>
                     {project.description}
                   </p>
 
                   {project.technologies && (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1 sm:gap-2">
                       {project.technologies.slice(0, 3).map((tech, i) => (
                         <Badge
                           key={i}
-                          className="px-2 py-1 text-xs"
+                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs"
                           style={{
                             backgroundColor: 'var(--accent-bg-soft)',
                             color: 'var(--accent-color)',
@@ -80,7 +81,7 @@ export default function Projects() {
                       ))}
                       {project.technologies.length > 3 && (
                         <Badge
-                          className="px-2 py-1 text-xs"
+                          className="px-1.5 sm:px-2 py-0.5 sm:py-1 text-[10px] sm:text-xs"
                           style={{
                             backgroundColor: 'var(--asu-ink)',
                             color: 'var(--asu-text-muted)',

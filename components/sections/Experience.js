@@ -44,10 +44,10 @@ export default function Experience() {
                     borderColor: 'var(--asu-border)'
                   }}
                 >
-                  <div className="p-5 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
+                  <div className="p-3 sm:p-5 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6">
                     {/* Icon */}
                     <div
-                      className="w-14 h-14 flex items-center justify-center flex-shrink-0"
+                      className="w-10 h-10 sm:w-14 sm:h-14 flex items-center justify-center flex-shrink-0"
                     >
                       {job.logo ? (
                         <Image
@@ -63,20 +63,20 @@ export default function Experience() {
                             ? 'linear-gradient(135deg, var(--asu-maroon) 0%, var(--asu-maroon-600) 100%)'
                             : 'linear-gradient(135deg, var(--asu-gold) 0%, var(--asu-gold-600) 100%)'
                         }}>
-                          <Briefcase className="w-7 h-7 text-white" />
+                          <Briefcase className="w-5 h-5 sm:w-7 sm:h-7 text-white" />
                         </div>
                       )}
                     </div>
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xl font-bold mb-1" style={{ color: 'var(--heading-accent)' }}>
+                      <h3 className="text-base sm:text-xl font-bold mb-1" style={{ color: 'var(--heading-accent)' }}>
                         {job.role}
                       </h3>
-                      <p className="text-base font-semibold mb-2" style={{ color: 'var(--asu-text)' }}>
+                      <p className="text-sm sm:text-base font-semibold mb-2" style={{ color: 'var(--asu-text)' }}>
                         {job.company}
                       </p>
-                      <div className="flex flex-wrap items-center gap-4 text-sm" style={{ color: 'var(--asu-text-muted)' }}>
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm" style={{ color: 'var(--asu-text-muted)' }}>
                         <div className="flex items-center gap-1.5">
                           <MapPin className="w-4 h-4" />
                           <span>{job.location}</span>

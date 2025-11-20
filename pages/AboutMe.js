@@ -490,7 +490,7 @@ export default function AboutMe() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="tracking-[0.35em] uppercase text-sm mb-4 text-black/60"
                     >
-                        Chapter 03
+                        Chapter 04
                     </motion.div>
                     <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-8 md:mb-12 text-black px-4" style={{ 
                         fontFamily: "'Inter', sans-serif",
@@ -503,7 +503,7 @@ export default function AboutMe() {
                         fontFamily: "'Inter', sans-serif",
                         fontWeight: 300
                     }}>
-                        <p>Right now, I'm learning, building, and growing —</p>
+                        <p>Right now, I'm learning, building, and growing </p>
                         <p>balancing code with creativity, precision with play.</p>
                         <p className="text-black/60 italic">Still that kid who wanted to make his parents proud,</p>
                         <p className="text-black/60 italic">just with better Wi-Fi now.</p>

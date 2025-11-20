@@ -100,16 +100,16 @@ export default function Contact() {
                     subtitle="Open to collaborations, opportunities, or just a good tech chat." 
                 />
 
-                <div className="grid lg:grid-cols-2 gap-12">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Contact Information */}
                     <motion.div
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
-                        className="space-y-8"
+                        className="space-y-6 md:space-y-8"
                     >
                         <div>
-                            <h3 className="text-2xl font-bold mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Get in Touch</h3>
+                            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Get in Touch</h3>
                             <div className="space-y-6">
                                 {contactInfo.map((info, index) => (
                                     <motion.div
@@ -142,8 +142,8 @@ export default function Contact() {
                         </div>
 
                         <div>
-                            <h3 className="text-2xl font-bold mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Social Network</h3>
-                            <div className="flex space-x-4">
+                            <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Social Network</h3>
+                            <div className="flex flex-wrap gap-3 md:gap-4">
                                 {socialLinks.map((social) => (
                                     <motion.a
                                         key={social.label}
@@ -167,10 +167,10 @@ export default function Contact() {
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
-                        className="p-8 rounded-md border"
+                        className="p-6 md:p-8 rounded-md border"
                         style={{ background: 'var(--asu-ink)', borderColor: 'var(--asu-border)' }}
                     >
-                        <h3 className="text-2xl font-bold mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Send Message</h3>
+                        <h3 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 uppercase tracking-widest" style={{ color: 'var(--heading-accent)' }}>Send Message</h3>
                         
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div>
