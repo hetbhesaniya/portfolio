@@ -258,3 +258,28 @@ button[aria-current="page"] .asu-underline-gold::after {
   box-shadow: 0 10px 30px rgba(255, 198, 39, 0.25), 0 0 20px rgba(255, 198, 39, 0.15);
   transform: translateY(-2px);
 }
+
+/* Theme switch button - prevent mobile context menu */
+#theme-switch-btn {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+}
+
+/* Also prevent context menu on images inside the button */
+#theme-switch-btn img {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}

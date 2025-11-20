@@ -63,6 +63,14 @@ export default function Navigation() {
     }, []);
 
     const handlePitchforkPressStart = (e) => {
+        // Prevent default to suppress browser actions (image menu, etc.)
+        if (e && e.preventDefault) {
+            e.preventDefault();
+        }
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        }
+        
         isLongPress.current = false;
         touchStartTime.current = Date.now();
         
@@ -108,6 +116,13 @@ export default function Navigation() {
                 toggleTheme();
             }
         }
+    };
+
+    const handleContextMenu = (e) => {
+        // Prevent context menu on mobile (save image, copy, etc.)
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
     };
 
     useEffect(() => {
@@ -280,6 +295,7 @@ export default function Navigation() {
                     {/* Right: Toggle Button + Mobile Menu */}
                     <div className="ml-auto flex items-center space-x-4">
                         <motion.button
+                            id="theme-switch-btn"
                             data-story-trigger
                             onMouseDown={(e) => {
                                 // Only handle mouse events on desktop
@@ -316,6 +332,7 @@ export default function Navigation() {
                                 isLongPress.current = false;
                                 touchStartTime.current = 0;
                             }}
+                            onContextMenu={handleContextMenu}
                             onClick={(e) => {
                                 // Prevent click from firing on mobile after touch events
                                 const timeSinceTouch = touchStartTime.current > 0 ? Date.now() - touchStartTime.current : Infinity;
@@ -350,6 +367,12 @@ export default function Navigation() {
                                 touchAction: 'manipulation',
                                 userSelect: 'none',
                                 WebkitUserSelect: 'none',
+                                WebkitTouchCallout: 'none',
+                                WebkitUserDrag: 'none',
+                                KhtmlUserSelect: 'none',
+                                MozUserSelect: 'none',
+                                msUserSelect: 'none',
+                                pointerEvents: 'auto',
                                 width: '48px',
                                 height: '48px',
                                 display: 'flex',
